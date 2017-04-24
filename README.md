@@ -86,7 +86,7 @@ Possible Improvement points:
 
 ## Get the Source Code and Build the Project
 
-1. Clone the Git repository https://github.wdf.sap.corp/C4CExtensions/cloud-c4c-ticket-duplicate-finder.
+1. Clone the Git repository https://github.com/SAP/cloud-c4c-ticket-duplicate-finder-ext.git
 In Eclipse import the project as an *Existing Maven Project* and point to the *pom.xml* file located in *cloud-c4c-ticket-duplicate-finder* folder.
 
 2. Build the project by using *Maven Build* option on the *pom.xml* with the goal *clean install*.
