@@ -1,0 +1,69 @@
+{
+  "_version": "1.1.0",
+  "sap.app": {
+	"_version": "1.1.0",
+	"id": "com.sap.cloud.c4c.ticket.duplicate.finder",
+	"type": "application",
+	"i18n": "i18n/i18n.properties",
+	"title": "{{appTitle}}",
+	"description": "{{appDescription}}",
+	"applicationVersion": {
+	  "version": "1.0.0"
+	},
+	"ach": "CA-UI5-DOC"
+  },
+  "sap.ui": {
+	"_version": "1.1.0",
+	"technology": "UI5",
+	"deviceTypes": {
+	  "desktop": true,
+	  "tablet": true,
+	  "phone": true
+	},
+	"supportedThemes": [
+	  "sap_bluecrystal"
+	]
+  },
+  "sap.ui5": {
+	"_version": "1.1.0",
+	"rootView": "com.sap.cloud.c4c.ticket.duplicate.finder.view.App",
+	"dependencies": {
+	  "minUI5Version": "1.30",
+	  "libs": {
+		"sap.m": {}
+	  }
+	},
+	"models": {
+	  "i18n": {
+		"type": "sap.ui.model.resource.ResourceModel",
+		"settings": {
+		  "bundleName": "com.sap.cloud.c4c.ticket.duplicate.finder.i18n.i18n"
+		}
+	  }
+	 },
+	 "routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "com.sap.cloud.c4c.ticket.duplicate.finder.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"bypassed": {
+					"target": "NotFound"
+				}
+			},
+			"routes": [{
+				"pattern": "",
+				"name": "App",
+				"target": "App"
+			}
+			],
+			"targets": {
+				"App": {
+					"viewName": "App"
+				}
+			}
+		}
+  }
+}

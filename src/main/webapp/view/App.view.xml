@@ -1,0 +1,80 @@
+<!DOCTYPE xml>
+<core:View height="100%" 
+	xmlns:core="sap.ui.core" 
+	xmlns="sap.m"
+	controllerName="com.sap.cloud.c4c.ticket.duplicate.finder.controller.App">
+	<App id="app">
+	<Page
+	id="indexPage"
+	title="Duplicate Ticket Finder Extension" >
+		<content>
+		<Table id="infoTable">
+		<columns>
+			<Column>
+				<Text text="Service Endpoint URL" />
+			</Column>
+			<Column width="7rem">		
+				<Text  text="HTTP Method" />
+			</Column>
+			<Column width="9rem">
+				<Text text="Description" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{info>/apiUrl}notifications" wrapping="true" />
+					<Text text="POST" wrapping="false"/>
+					<Text text="Notification Service"/>
+				</cells>
+			</ColumnListItem>
+			<ColumnListItem>
+				<cells>
+					<Text text="{info>/apiUrl}ticket/search/\{ticketId\}" wrapping="true" />
+					<Text text="GET" wrapping="false"/>
+					<Text text="Search Service"/>
+				</cells>
+			</ColumnListItem>
+			<ColumnListItem>
+				<cells>
+					<Text text="{info>/apiUrl}ticket/merge" wrapping="true" />
+					<Text text="POST" wrapping="false"/>
+					<Text text="Merge Service"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+		</Table>
+		<Table id="ticketsTable" items="{tickets>/}">
+		<headerToolbar>
+			<Toolbar>
+				<Title text="Currently stored tickets" align="Center" level="H2"/>
+				<ToolbarSpacer />
+				<Text text="Count: {= ${tickets>/}.length}"/>
+				<Button text="Fetch" type="Default" press="fetchTickets" icon="sap-icon://synchronize" />
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column width="5rem" >
+				<Text text="Ticket ID" />
+			</Column>
+			<Column width="19rem">
+				<Text  text="Object ID" />
+			</Column>
+			<Column>
+				<Text text="Subject" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{tickets>id}" wrapping="false" />
+					<Text text="{tickets>objectId}" wrapping="false"/>
+					<Text text="{tickets>subject}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+		</Table>
+		</content>
+	</Page>
+	</App>
+</core:View>

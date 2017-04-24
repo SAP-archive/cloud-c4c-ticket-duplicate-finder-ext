@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script id='sap-ui-bootstrap'
+			src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+			data-sap-ui-theme='sap_bluecrystal'
+			data-sap-ui-libs='sap.m'
+			data-sap-ui-xx-bindingSyntax='complex'></script>
+<script id="view" type="text/xmldata">
+	<mvc:View controllerName="ticketsController"
+	xmlns="sap.m" xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:table="sap.ui.table"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<App>
+	<Page showHeader="true" enableScrolling="false"
+		  title="Ticket duplicate suggestions">
+		<headerContent>
+			<Button text="Collapse all" press="onCollapseAll" />
+			<Button text="Expand all" press="onExpandFirstLevel" />
+		</headerContent>
+		<content>
+			<table:TreeTable id="TreeTableBasic"
+				rows="{path:'tickets>/tickets',
+                           parameters: {arrayNames:['others']}}"
+				selectionMode="None" enableSelectAll="false"
+				class="sapUiSizeCompact">
+				<table:columns>
+					<table:Column width="8rem">
+						<Label text="ID"/>
+						<table:template>
+							<HBox>
+								<core:Icon src="sap-icon://accelerated"
+									class="sapMStdTileIconDiv sapUiSmallMarginEnd"></core:Icon>
+								<Link press="openDeepLink" text="{tickets>id}"  app:id="{tickets>objectId}"/>
+							</HBox>
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Subject" />
+						<table:template>
+							<Text text="{tickets>subject}" />
+						</table:template>
+					</table:Column>
+					<table:Column width="5rem">
+						<Label text="Priority"/>
+						<table:template>
+							<Text text="{tickets>priority}" />
+						</table:template>
+					</table:Column>
+					<table:Column width="7rem">
+						<Label text="Status" />
+						<table:template>
+							<Text text="{tickets>status}" />
+						</table:template>
+					</table:Column>
+					<table:Column>
+						<Label text="Action" />
+						<table:template>
+							<Button text="Add To Group" visible="{tickets>onTopLevel}" app:id="{tickets>id}" press="merge"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:TreeTable>
+		</content>
+	</Page>
+	</App>
+</mvc:View>
+</script>
+<script type="text/javascript">
+  function getTickets(currentTicketId) {
+    sap.byd.ui.mashup.callService({
+      serviceId: '<SearchServiceID>',
+      parameter: {"{ticketId}": currentTicketId },
+      onComplete: 'getTicketsOnCompleteHandler',
+      onError: 'getTicketsOnErrorHandler'
+    });
+  };
+
+  var getTicketsOnCompleteHandler;
+  var getTicketsOnErrorHandler;
+</script>
+<script type="text/javascript">
+  function mergeTickets(currentId, duplicateId) {
+    sap.byd.ui.mashup.callService({
+      serviceId: '<MergeServiceID>',
+      parameter: {"currentId": currentId,"duplicateId": duplicateId},
+      onComplete: 'mergeTicketsOnCompleteHandler',
+      onError: 'mergeTicketsOnErrorHandler'
+    });
+  };
+
+  var mergeTicketsOnCompleteHandler;
+  var mergeTicketsOnErrorHandler;
+</script>
+
+<script type="text/javascript">
+
+	loadTickets = function(currentTicketId) {
+		getTicketsOnCompleteHandler = function(data){
+		var data = JSON.parse(data);
+		var model = new sap.ui.model.json.JSONModel(_parseData(data));
+		sap.ui.getCore().byId("view1").setModel(model, "tickets");	        	
+		}
+		getTicketsOnErrorHandler = function(error){
+			sap.m.MessageBox.error("No information for that ticket.");
+		}
+		getTickets(currentTicketId);
+	},
+	
+	 _parseData = function(data){
+		var model = {
+			tickets : []
+		}
+		for (var i in data){
+			var first = data[i].tickets[0];
+			var tail = data[i].tickets.slice(1, data[i].length);
+			first.others = tail;
+			first.others.forEach(function(element){
+			    element.onTopLevel = false;
+			});
+			first.onTopLevel = true;
+			model.tickets.push(first);
+		}
+		return model;
+	}
+</script>
+<script type="text/javascript">
+	sap.byd.ui.mashup.onContextUpdate = function() {
+		loadTickets(sap.byd.ui.mashup.context.inport.TicketID);		
+	}
+</script>
+<script>
+	var c4cHost = "<C4CHost>";
+
+	sap.ui.define(
+			[ 'jquery.sap.global',
+              'sap/ui/core/mvc/Controller',
+  			  'sap/ui/model/json/JSONModel',
+  			  'sap/m/MessageBox'],
+			function(jQuery, Controller, JSONModel, MessageBox) {
+				"use strict";
+				return Controller.extend("ticketsController",{
+
+					onInit : function() {
+						var currentTicketId = sap.byd.ui.mashup.context.inport.TicketID;
+						if(currentTicketId) {
+							loadTickets(currentTicketId);
+						}
+					},
+
+			        merge: function(event){
+			        	var duplicateId = event.getSource().data("id");
+			        	mergeTicketsOnCompleteHandler = function(){
+			        		loadTickets(sap.byd.ui.mashup.context.inport.TicketID);
+			        	}
+
+			        	mergeTicketsOnErrorHandler = function(){
+			        		MessageBox.error("Failed to add ticket to group.");
+			        	}
+			        	
+			        	mergeTickets(sap.byd.ui.mashup.context.inport.TicketID, duplicateId);
+			        },
+
+			        onCollapseAll: function () {
+			            var oTreeTable = this.getView().byId("TreeTableBasic");
+			            oTreeTable.collapseAll();
+			        },
+
+			        onExpandFirstLevel: function () {
+			            var oTreeTable = this.getView().byId("TreeTableBasic");
+			            oTreeTable.expandToLevel(1);
+			        },
+			        
+			        openDeepLink: function(event){
+			        	var ticketId = event.getSource().data("id");
+			        	var deepLink = this.getTicketDeepLink(c4cHost, ticketId);
+			        	window.open(deepLink);
+			        },
+			        
+				    getTicketDeepLink: function(c4cHost, ticketId){
+						var encodedJson = this.prepareBase64EncodedJson(ticketId);
+						return "https://" + c4cHost + "?redirectUrl=/sap/byd/runtime#Nav/1/" + encodedJson;
+				    },
+				    
+				    prepareBase64EncodedJson: function(ticketId) {
+				    	var json = {
+				    		thingparams: { Key: ticketId },
+				    		inPort: "Inspect",
+				    		target: "/BYD_COD/ServiceOnDemand/AgentWorkspace/COD_SEOD_Agent_Workspace_TI.TI.uicomponent"
+				    	}
+			            return btoa(JSON.stringify(json));
+				    }
+				});
+			});
+
+
+sap.ui.view({
+		id: "view1",
+		viewContent: jQuery("#view").html(),
+		type: sap.ui.core.mvc.ViewType.XML
+	}).placeAt("content");
+
+</script>
+</head>
+<body id="content" class="sapUiBody">
+</body>
+</html>
