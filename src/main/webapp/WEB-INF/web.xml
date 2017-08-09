@@ -1,25 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <display-name>Archetype Created Web Application</display-name>
-  <resource-ref>
-    <res-ref-name>connectivityConfiguration</res-ref-name>
-    <res-type>com.sap.core.connectivity.api.configuration.ConnectivityConfiguration</res-type>
-  </resource-ref>
-  <resource-ref>
-    <res-ref-name>authenticationHeaderProvider</res-ref-name>
-    <res-type>com.sap.core.connectivity.api.authentication.AuthenticationHeaderProvider</res-type>
-  </resource-ref>
-  <servlet>
-    <servlet-name>CXFServlet</servlet-name>
-    <servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet</servlet-class>
-    <init-param>
-      <param-name>javax.ws.rs.Application</param-name>
-      <param-value>com.sap.cloud.c4c.ticket.duplicate.finder.application.ApplicationConfiguration</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>CXFServlet</servlet-name>
-    <url-pattern>/api/v1/*</url-pattern>
-  </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>Archetype Created Web Application</display-name>
+	<resource-ref>
+		<res-ref-name>connectivityConfiguration</res-ref-name>
+		<res-type>com.sap.core.connectivity.api.configuration.ConnectivityConfiguration</res-type>
+	</resource-ref>
+	<resource-ref>
+		<res-ref-name>authenticationHeaderProvider</res-ref-name>
+		<res-type>com.sap.core.connectivity.api.authentication.AuthenticationHeaderProvider</res-type>
+	</resource-ref>
+	<servlet>
+		<servlet-name>CXFServlet</servlet-name>
+		<servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet</servlet-class>
+		<init-param>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>com.sap.cloud.c4c.ticket.duplicate.finder.application.ApplicationConfiguration</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/api/v1/*</url-pattern>
+	</servlet-mapping>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>User Page</web-resource-name>
+			<url-pattern>/index.html</url-pattern>
+			<url-pattern>/api/v1/user/current</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>Everyone</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Logout</web-resource-name>
+			<url-pattern>/api/v1/*</url-pattern>
+			<url-pattern>/login.html</url-pattern>
+		</web-resource-collection>
+	</security-constraint>
+	<login-config>
+		<auth-method>FORM</auth-method>
+	</login-config>
 </web-app>

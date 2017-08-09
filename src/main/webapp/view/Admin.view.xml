@@ -1,0 +1,95 @@
+<mvc:View
+	controllerName="com.sap.cloud.c4c.ticket.duplicate.finder.controller.Admin"
+	xmlns:l="sap.ui.layout"
+	xmlns:unified="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	class="viewPadding">
+		<unified:Shell searchVisible="false"> 
+			<unified:headEndItems>
+				<unified:ShellHeadItem tooltip="Admin Panel"
+					icon="sap-icon://key-user-settings" press="handleAdminPanelPress"
+					visible="{= RegExp('Administrator', 'i').test(${currentUser>/roles})}" />
+				<unified:ShellHeadItem icon="sap-icon://log"
+					tooltip="Logoff" press="handleLogoffPress" />
+			</unified:headEndItems>
+			<unified:user>
+				<unified:ShellHeadUserItem image="sap-icon://person-placeholder"
+					username="{currentUser>/firstname} {currentUser>/lastname}"
+					tooltip="{currentUser>/email}" showPopupIndicator="false" />
+			</unified:user>
+			<unified:content>
+				<Panel>
+					<Table id="infoTable">
+						<columns>
+							<Column>
+								<Text text="Service Endpoint URL" />
+							</Column>
+							<Column width="7rem">
+								<Text text="HTTP Method" />
+							</Column>
+							<Column width="9rem">
+								<Text text="Description" />
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{info>/apiUrl}notifications" wrapping="true" />
+									<Text text="POST" wrapping="false" />
+									<Text text="Notification Service" />
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem>
+								<cells>
+									<Text text="{info>/apiUrl}ticket/search/\{ticketId\}"
+										wrapping="true" />
+									<Text text="GET" wrapping="false" />
+									<Text text="Search Service" />
+								</cells>
+							</ColumnListItem>
+							<ColumnListItem>
+								<cells>
+									<Text text="{info>/apiUrl}ticket/merge" wrapping="true" />
+									<Text text="POST" wrapping="false" />
+									<Text text="Merge Service" />
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					<Table id="ticketsTable" items="{tickets>/}">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="Currently stored tickets" align="Center"
+									level="H2" />
+								<ToolbarSpacer />
+								<Text text="Count: {= ${tickets>/}.length}" />
+								<Button text="Fetch" type="Default" press="fetchTickets"
+									icon="sap-icon://synchronize" />
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="5rem">
+								<Text text="Ticket ID" />
+							</Column>
+							<Column width="19rem">
+								<Text text="Object ID" />
+							</Column>
+							<Column>
+								<Text text="Subject" />
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{tickets>id}" wrapping="false" />
+									<Text text="{tickets>objectId}" wrapping="false" />
+									<Text text="{tickets>subject}" />
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</Panel>
+			</unified:content>
+		</unified:Shell>
+</mvc:View>

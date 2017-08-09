@@ -55,13 +55,13 @@
 			},
 			"routes": [{
 				"pattern": "",
-				"name": "App",
-				"target": "App"
+				"name": "Admin",
+				"target": "Admin"
 			}
 			],
 			"targets": {
-				"App": {
-					"viewName": "App"
+				"Admin": {
+					"viewName": "Admin"
 				}
 			}
 		}

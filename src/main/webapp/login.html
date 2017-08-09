@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script
+	src="https://sapui5.hana.ondemand.com/resources/sap-ui-cachebuster/sap-ui-core.js"
+	id="sap-ui-bootstrap" data-sap-ui-libs="sap.m"
+	data-sap-ui-xx-bindingSyntax="complex"
+	data-sap-ui-xx-supportedLanguages="default"
+	data-sap-ui-theme="sap_belize" data-sap-ui-debug="false"
+	data-sap-ui-preload="async"
+	data-sap-ui-resourceroots='{"com.sap.cloud.c4c.ticket.duplicate.finder": "./"}'>
+	
+</script>
+<script>
+	sap.ui.getCore().attachInit(function() {
+		var app = new sap.m.App({
+			initialPage : "Login"
+		});
+		var page = sap.ui.view({
+			id : "Login",
+			viewName : "com.sap.cloud.c4c.ticket.duplicate.finder.view.Login",
+			type : sap.ui.core.mvc.ViewType.XML
+		});
+		app.addPage(page);
+		app.placeAt("content");
+	});
+</script>
+</head>
+<body class="sapUiBody" role="application">
+	<div id="content"></div>
+</body>
+
+</html>

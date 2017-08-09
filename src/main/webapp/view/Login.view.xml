@@ -1,0 +1,15 @@
+<!DOCTYPE xml>
+<core:View height="100%" xmlns:core="sap.ui.core" xmlns="sap.m"
+	controllerName="com.sap.cloud.c4c.ticket.duplicate.finder.controller.Login">
+	<Panel height="100%">
+		<FlexBox height="100%" alignItems="Center" justifyContent="Center">
+			<items>
+				<VBox>
+					<Title level="H1"
+						text="You have been logged out from the application!" />
+					<Button text="Log On" type="Emphasized" press="handleLogOn"/>
+				</VBox>
+			</items>
+		</FlexBox>
+	</Panel>
+</core:View>
