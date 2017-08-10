@@ -50,14 +50,11 @@ OData notification feed subscription is used in order to trigger asynchronous ti
 
 The main focus is on the following integration points:
 
+* Simple standalone interface protected with FORM authentication and Signgle Sign-On with SAP Hybris Cloud for Customer shows status of the application
 * Setting up connectivity for System to System integration using OData API - used in order to fetch the Service Reqeust tickets
 * Exposing services on the SAP Cloud Platform and consuming these services in SAP Hybris Cloud for Customer - used in order to integrate the native HTML mashup with the Java application backend
-* Developing and Delivering Extension Application UIs in SAP Hybris Cloud for Customer
-* Receiving event notifications upon business object changes in SAP Hybris Cloud for Customer.
-
-Possible Improvement points:
-
-* Standalone UI for Analytics and Administration: it would take advantage of Sigle-Sign-On between systems and API Access with User Propagation.
+* Developing and Configuring Extension Application UIs in SAP Hybris Cloud for Customer - in order to show Ticket Duplicate Finder interface in ticket processing screen
+* Receiving event notifications upon business object changes in SAP Hybris Cloud for Customer - in order to implement real time ticket replication and analysis
 
 ## Prerequisites
 
