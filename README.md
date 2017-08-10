@@ -265,6 +265,8 @@ You should now have the application configured and working.
 
 ## Point Of Interest in the Application Code
 
+If you want to dig into the application source code, for convenience we collected a list of notable classes and methods to check. For convenience the Eclipse breakpoints file is available in /src/main/resources/PointsOfInterest.bkpt
+
 | Class             |          Method | Description  |
 |-|-|-|
 |InitializeListener|contextInitialized|On application start loads initial set of tickets in the index.|
