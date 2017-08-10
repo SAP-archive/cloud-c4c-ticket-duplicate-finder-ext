@@ -271,7 +271,7 @@ You should now have the application configured and working.
 |C4CTicketService|retrieveLastCreatedC4CTickets|Retrieves a set of latest tickets for SAP Hybris Cloud for Customer system.|
 ||retrieveC4CTicketByID|Retrieves specific ticket from SAP Hybris Cloud for Customer system.|
 |TicketResource|search|REST Service for finding similar tickets to the passed ticket.|
-||merge|Adds ticket and his group to a group of similar tickets.|
+||merge|REST Service that adds ticket and his group to a group of similar tickets.|
 |IndexService|add|Adds new ticket to the index in its own group.|
 ||mergeTickets|Merge two ticket groups.|
 ||searchForTicket|Finds groups of similar tickets.|
