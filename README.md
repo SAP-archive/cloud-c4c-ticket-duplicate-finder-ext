@@ -263,6 +263,22 @@ You should now have the application configured and working.
 8. Save the subscription configuration.
 9. Test the subscription by creating a new Ticket in the *Service > Tickets* page and observe that the number of tickets in the application index increases.
 
+## Point Of Interest in the Application Code
+
+| Class             |          Method | Description  |
+|-|-|-|
+|InitializeListener|contextInitialized|On application start loads initial set of tickets in the index.|
+|C4CTicketService|retrieveLastCreatedC4CTickets|Retrieves a set of latest tickets for SAP Hybris Cloud for Customer system.|
+||retrieveC4CTicketByID|Retrieves specific ticket from SAP Hybris Cloud for Customer system.|
+|TicketResource|search|REST Service for finding similar tickets to the passed ticket.|
+||merge|Adds ticket and his group to a group of similar tickets.|
+|IndexService|add|Adds new ticket to the index in its own group.|
+||mergeTickets|Merge two ticket groups.|
+||searchForTicket|Finds groups of similar tickets.|
+|UserService|getLoggedInUser|Returns logged in user information.|
+||logoutUser|Logs out the current user.|
+|EventNotificationService|receiveNotificationEvent|REST interface for receiving ticket creation notifications.|
+
 ### Copyright and License
 
 ```
