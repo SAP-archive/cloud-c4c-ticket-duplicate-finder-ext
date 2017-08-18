@@ -178,7 +178,7 @@
 			        	window.open(deepLink);
 			        },
 			        
-				    getTicketDeepLink: function(c4cHost, ticketId){
+				    getTicketDeepLink: function(ticketId){
 						var encodedJson = this.prepareBase64EncodedJson(ticketId);
 						return "https://" + sap.byd.ui.mashup.context.system.ShortHostname + "?redirectUrl=/sap/byd/runtime#Nav/1/" + encodedJson;
 				    },
