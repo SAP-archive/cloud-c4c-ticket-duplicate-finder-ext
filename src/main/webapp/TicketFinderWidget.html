@@ -133,8 +133,6 @@
 	}
 </script>
 <script>
-	var c4cHost = "<C4CHost>";
-
 	sap.ui.define(
 			[ 'jquery.sap.global',
               'sap/ui/core/mvc/Controller',
@@ -176,13 +174,13 @@
 			        
 			        openDeepLink: function(event){
 			        	var ticketId = event.getSource().data("id");
-			        	var deepLink = this.getTicketDeepLink(c4cHost, ticketId);
+			        	var deepLink = this.getTicketDeepLink(ticketId);
 			        	window.open(deepLink);
 			        },
 			        
 				    getTicketDeepLink: function(c4cHost, ticketId){
 						var encodedJson = this.prepareBase64EncodedJson(ticketId);
-						return "https://" + c4cHost + "?redirectUrl=/sap/byd/runtime#Nav/1/" + encodedJson;
+						return "https://" + sap.byd.ui.mashup.context.system.ShortHostname + "?redirectUrl=/sap/byd/runtime#Nav/1/" + encodedJson;
 				    },
 				    
 				    prepareBase64EncodedJson: function(ticketId) {

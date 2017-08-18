@@ -50,8 +50,8 @@ OData notification feed subscription is used in order to trigger asynchronous ti
 
 The main focus is on the following integration points:
 
-* Simple standalone interface protected with FORM authentication and Signgle Sign-On with SAP Hybris Cloud for Customer shows status of the application
-* Setting up connectivity for System to System integration using OData API - used in order to fetch the Service Reqeust tickets
+* Simple standalone interface protected with FORM authentication and Single Sign-On with SAP Hybris Cloud for Customer shows status of the application
+* Setting up connectivity for System to System integration using OData API - used in order to fetch the Service Request tickets
 * Exposing services on the SAP Cloud Platform and consuming these services in SAP Hybris Cloud for Customer - used in order to integrate the native HTML mashup with the Java application backend
 * Developing and Configuring Extension Application UIs in SAP Hybris Cloud for Customer - in order to show Ticket Duplicate Finder interface in ticket processing screen
 * Receiving event notifications upon business object changes in SAP Hybris Cloud for Customer - in order to implement real time ticket replication and analysis
@@ -193,8 +193,7 @@ The Duplicate Ticket Finder application provides such HTML mashup widget in the 
 3. Find and replace the following variables in the *TicketFinderWidget.html* file with the corresponding values.
 
             <SearchServiceID>	    Search Service mashup service ID of the Web Service mashup
-            <MergeServiceID>	    Merge Service mashup service ID of the Web Service machup
-            <C4CHost>   	    SAP Hybris Cloud for Customer tenant host
+            <MergeServiceID>	    Merge Service mashup service ID of the Web Service mashup            
 
 4. Save the file *TicketFinderWidget.html* text content in clipboard.
 5. Log on to the SAP Hybris Cloud for Customer system and chose *Adapt > Launch in Microsoft SilverLight* from the upper right menu.
