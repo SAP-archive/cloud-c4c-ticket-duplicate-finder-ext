@@ -221,20 +221,20 @@ The Duplicate Ticket Finder application provides such HTML mashup widget in the 
 1. Log on to the SAP Hybris Cloud for Customer system and choose *Service > Tickets*.
 2. Select *All Tickets* from the ticket filter and open one of the tickets.
 3. On the top right corner click on *Personalize > This Screen*.
-
-![alt tag](./src/main/resources/images/image2017-2-26%2021-24-33.png)
-
-4. In the *Personalize* screen, select *Mashups and Web Services*, and set the *Visible* checkbox to your mashup (under *Productivity & Tools* section).
-
-![alt tag](./src/main/resources/images/image2017-2-26%2021-28-55.png)
-
-5. Save the changes and close the *Personalization* screen.
+![alt tag](./src/main/resources/images/ADD_MASHUP_01.png)
+4. Select one of the screen sections and click on *Add Mashup* button, that appear on the popup menu
+![alt tag](./src/main/resources/images/ADD_MASHUP_02.png)
+5. In the *Mashups and Web Services* screen, find your Mashup and set the *Visible* and *Full Width* checkboxes
+![alt tag](./src/main/resources/images/ADD_MASHUP_04.png)
+6. *Apply* the changes
+![alt tag](./src/main/resources/images/ADD_MASHUP_05.png)
+7. Select *End Personalization* to end screen edit mode.
 
 **Result**
 
 You should now have the application configured and working.
 
-![alt tag](./src/main/resources/images/image2017-2-26%2021-33-11.png)
+![alt tag](./src/main/resources/images/ADD_MASHUP_06.png)
 
 ## Configure Subscription for Creating the Tickets Event Notifications in SAP Hybris Cloud for Customer
 
