@@ -101,10 +101,10 @@ Use these settings:
     
 **Note: Do not start the application at this point.**
 
-## Configuring the Application Connectivity to SAP Hybris Cloud for Customer OData API Using Technical User
+## Configuring the Application Connectivity to SAP Cloud for Customer OData API Using Technical User
 
-The application uses Service to Service connectivity with technical user to replicate and index the ticket information from the SAP Hybris Cloud for Customer system.
-During startup it replicates the last 20 tickets in the system and adds them in the index. You need to configure connectivity to SAP Hybris Cloud for Customer system for your application by creating the required destination. You can use the dedicated service agent credentials - C4C credentials of a user that can see and process Service Request tickets.
+The application uses Service to Service connectivity with technical user to replicate and index the ticket information from the SAP Cloud for Customer system.
+During startup it replicates the last 20 tickets in the system and adds them in the index. You need to configure connectivity to SAP Cloud for Customer system for your application by creating the required destination. You can use the dedicated service agent credentials - C4C credentials of a user that can see and process Service Request tickets.
 
 1. Open the Destination template, you can find it in the project resource folder.
 
@@ -112,24 +112,24 @@ During startup it replicates the last 20 tickets in the system and adds them in 
 
 2. Replace the following variables in the destination file:
 
-            <C4C Host>:	     your SAP Hybris Cloud for Customer system host.
-            <C4C User>:	     your SAP Hybris Cloud for Customer service agent user.
-            <C4C Password>:	 your SAP Hybris Cloud for Customer service agent password.
+            <C4C Host>:	     your SAP Cloud for Customer system host.
+            <C4C User>:	     your SAP Cloud for Customer service agent user.
+            <C4C Password>:	 your SAP Cloud for Customer service agent password.
                   
 3. Import this destination file on application level for your application in SAP Cloud Clockpit. Go to your application in SAP Cloud Platform Cockpit: *Configuration > Destinations > Import Destination*.
 
 ![alt tag](./src/main/resources/images/image2017-2-26%202-42-11.png)
 
 4. Start your application from SAP Cloud Platform Cockpit and after it is started open the application home page in a browser.
-      Upon start the application connects to the SAP Hybris Cloud for Customer back-end and replicates and index the last 20 tickets. Opening the home page shows the services exposed by the application and status of the ticket index.
+      Upon start the application connects to the SAP Cloud for Customer back-end and replicates and index the last 20 tickets. Opening the home page shows the services exposed by the application and status of the ticket index.
 
 **Note! The services URLs are used by the next installation steps, so it is good idea to keep the page open.**
 
-## Configuring Web Service Mashups in SAP Hybris Cloud for Customer System
+## Configuring Web Service Mashups in SAP Cloud for Customer System
 
-To consume data from an external system in SAP Hybris Cloud for Customer, you need to create and configure Web Service Mashups for the requested services.
+To consume data from an external system in SAP Cloud for Customer, you need to create and configure Web Service Mashups for the requested services.
 
-1. Log on to the SAP Hybris Cloud for Customer system and chose *Adapt > Launch in Microsoft SilverLight* from the upper right menu.
+1. Log on to the SAP Cloud for Customer system and chose *Adapt > Launch in Microsoft SilverLight* from the upper right menu.
 2. From the *Administrator* menu select *MASHUP WEB SERVICES*.
 
 ![alt tag](./src/main/resources/images/image2017-2-26%202-52-33.png)
