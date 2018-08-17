@@ -2,7 +2,7 @@
 
 ## SAP Duplicate Tickets Finder Sample Application 
 
-SAP Cloud for Customer allows your company sales and support teams to engage with customers across multiple channels. You can use SAP Cloud Platform to develop, deploy and host and SAP Hybris Cloud for Customer extension applications, that simplify and differentiate your business processes.
+SAP Cloud for Customer allows your company sales and support teams to engage with customers across multiple channels. You can use SAP Cloud Platform to develop, deploy and host and SAP Cloud for Customer extension applications, that simplify and differentiate your business processes.
 
 SAP duplicate tickets finder is a sample extension application for SAP Cloud for Customer, that helps support employees in finding duplicate tickets reported for the same customer issues. 
 
@@ -10,7 +10,7 @@ SAP duplicate tickets finder is a sample extension application for SAP Cloud for
 
 Ticket processing is done by Service Agents in SAP Cloud for Customer. For most businesses, improving the customer service quality is a main component for success, driving loyalty and customer satisfaction. Main component for this is improving the efficiency of the Service Agents. Finding a solution of customer problems fast, reducing duplicate work for service request investigation and reacting on most common customer challenges adequately is an area for innovation that can be explored by extension application developers. 
 
-Duplicate ticket finder sample application is focusing on this business case, by offering simple integrated solution to find and classify tickets reported or related to the same customer problem. The ultimate goal of the application is to demonstrate the technical integration points between SAP Cloud for Customer and SAP Cloud Platform Java Extension Applications in the context of a realistic business scenario. It can be used as a template for gaining knowledge on how to implement extension applications for SAP Hybris Cloud for Customer using SAP Cloud Platform. 
+Duplicate ticket finder sample application is focusing on this business case, by offering simple integrated solution to find and classify tickets reported or related to the same customer problem. The ultimate goal of the application is to demonstrate the technical integration points between SAP Cloud for Customer and SAP Cloud Platform Java Extension Applications in the context of a realistic business scenario. It can be used as a template for gaining knowledge on how to implement extension applications for SAP Cloud for Customer using SAP Cloud Platform. 
 
 The application use-case is:
 
@@ -42,7 +42,7 @@ Service requests filled by people are usually a mixture of both structured and u
 
 The application implements very simple algorithm which uses the ticket description as indicator for similarities. It uses OData APIs to extract the tickets from the Cloud for Customer system and builds [Lucene](https://lucene.apache.org/core/) in-memory index. When new ticket is created it gets added to the index. When two tickets are catergorized by users as duplicate they get merged in the index, so they appear in the same group. All data is kept in memory, so the index gets lost after application restart.
 
-The UI is implemented as native HTML mashup in SAP Hybris Cloud for Customer. In order to connect to the Java backend logic, it uses 2 Web Service mashups, which obtain the groups of similar tickets to the current ticket and allow  the user to add the current ticket to existing group of duplicates.
+The UI is implemented as native HTML mashup in SAP Cloud for Customer. In order to connect to the Java backend logic, it uses 2 Web Service mashups, which obtain the groups of similar tickets to the current ticket and allow  the user to add the current ticket to existing group of duplicates.
 
 OData notification feed subscription is used in order to trigger asynchronous ticket replication.  
 
@@ -50,19 +50,19 @@ OData notification feed subscription is used in order to trigger asynchronous ti
 
 The main focus is on the following integration points:
 
-* Simple standalone interface protected with FORM authentication and Single Sign-On with SAP Hybris Cloud for Customer shows status of the application
+* Simple standalone interface protected with FORM authentication and Single Sign-On with SAP Cloud for Customer shows status of the application
 * Setting up connectivity for System to System integration using OData API - used in order to fetch the Service Request tickets
-* Exposing services on the SAP Cloud Platform and consuming these services in SAP Hybris Cloud for Customer - used in order to integrate the native HTML mashup with the Java application backend
-* Developing and Configuring Extension Application UIs in SAP Hybris Cloud for Customer - in order to show Ticket Duplicate Finder interface in ticket processing screen
-* Receiving event notifications upon business object changes in SAP Hybris Cloud for Customer - in order to implement real time ticket replication and analysis
+* Exposing services on the SAP Cloud Platform and consuming these services in SAP Cloud for Customer - used in order to integrate the native HTML mashup with the Java application backend
+* Developing and Configuring Extension Application UIs in SAP Cloud for Customer - in order to show Ticket Duplicate Finder interface in ticket processing screen
+* Receiving event notifications upon business object changes in SAP Cloud for Customer - in order to implement real time ticket replication and analysis
 
 ## Prerequisites
 
-* SAP Hybris Cloud for Customer tenant and user with administrative privileges for performing the configurations
-* SAP Hybris Cloud for Customer service agent user credentials
-* SAP Cloud Platform account configured for SAP Hybris Cloud for Customer extensions. Follow the SAP Cloud Platform documentation for [Extending SAP Hybris Cloud for Customer](https://help.sap.com/viewer/462e41a242984577acc28eae130855ad/Cloud/en-US) on how to configure the integration. The following integration need to be configured between the two systems: 
-  * Single-Sign-On between the SAP Cloud Platform Account and the SAP Hybris Cloud for Customer tenant
-  * OAuth identity provider trust is configured between SAP Hybris Cloud for Customer tenant and SAP Cloud Platform Application Account 
+* SAP Cloud for Customer tenant and user with administrative privileges for performing the configurations
+* SAP Cloud for Customer service agent user credentials
+* SAP Cloud Platform account configured for SAP Cloud for Customer extensions. Follow the SAP Cloud Platform documentation for [Extending SAP Cloud for Customer](https://help.sap.com/viewer/462e41a242984577acc28eae130855ad/Cloud/en-US) on how to configure the integration. The following integration need to be configured between the two systems: 
+  * Single-Sign-On between the SAP Cloud Platform Account and the SAP Cloud for Customer tenant
+  * OAuth identity provider trust is configured between SAP Cloud for Customer tenant and SAP Cloud Platform Application Account 
 * Browser with Microsoft Silverlight Plugin Installed (Google Chrome does not support Microsoft Silverlight)
   * Internet Explorer or Mozilla Firefox for Windows
   * Mozilla Firefox or Safari for Mac 
@@ -75,11 +75,11 @@ The main focus is on the following integration points:
 
 * Import Duplicate Ticket Finder Java application in your Eclipse IDE. 
 * Build and Deploy Duplicate Ticket Finder Java application on SAP Cloud Platform Extension Account.
-* Configure SAP Hybris Cloud for Customer OData API access, using a technical user.
-* Configure OData Event Notification in SAP Hybris Cloud for Customer for creating tickets.
-* Create and configure Web Service Mashups in SAP Hybris Cloud for Customer for your application.
-* Create and configure HTML Mashup Interface in SAP Hybris Cloud for Customer for your application.
-* Embed the application interface in SAP Hybris Cloud for Customer UI.
+* Configure SAP Cloud for Customer OData API access, using a technical user.
+* Configure OData Event Notification in SAP Cloud for Customer for creating tickets.
+* Create and configure Web Service Mashups in SAP Cloud for Customer for your application.
+* Create and configure HTML Mashup Interface in SAP Cloud for Customer for your application.
+* Embed the application interface in SAP Cloud for Customer UI.
 
 ## Get the Source Code and Build the Project
 
@@ -196,7 +196,7 @@ The Duplicate Ticket Finder application provides such HTML mashup widget in the 
             <MergeServiceID>	    Merge Service mashup service ID of the Web Service mashup            
 
 4. Save the file *TicketFinderWidget.html* text content in clipboard.
-5. Log on to the SAP Hybris loud for Customer system and chose *Adapt > Launch in Microsoft SilverLight* from the upper right menu.
+5. Log on to the SAP Cloud for Customer system and chose *Adapt > Launch in Microsoft SilverLight* from the upper right menu.
 6. From the *Administrator* menu select *MASHUP AUTHORING* to open mashup authoring screen.
 
 ![alt tag](./src/main/resources/images/image2017-2-26%2016-29-41.png)
@@ -216,9 +216,9 @@ The Duplicate Ticket Finder application provides such HTML mashup widget in the 
 
 9. Choose *Save and close*.
 
-## Add the Duplicate Ticket Finder Widget to Your Ticket Processing Screen in SAP Hybris Cloud for Customer
+## Add the Duplicate Ticket Finder Widget to Your Ticket Processing Screen in SAP Cloud for Customer
 
-1. Log on to the SAP Hybris Cloud for Customer system and choose *Service > Tickets*.
+1. Log on to the SAP Cloud for Customer system and choose *Service > Tickets*.
 2. Select *All Tickets* from the ticket filter and open one of the tickets.
 3. On the top right corner click on *Personalize > This Screen*.
 ![alt tag](./src/main/resources/images/ADD_MASHUP_01.png)
@@ -236,9 +236,9 @@ You should now have the application configured and working.
 
 ![alt tag](./src/main/resources/images/ADD_MASHUP_06.png)
 
-## Configure Subscription for Creating the Tickets Event Notifications in SAP Hybris Cloud for Customer
+## Configure Subscription for Creating the Tickets Event Notifications in SAP Cloud for Customer
 
-1. Log on to SAP Hybris Cloud for Customer system.
+1. Log on to SAP Cloud for Customer system.
 2. Go to *ADMINISTRATOR > GENERAL SETTINGS* tab and open the *OData Feed Notification* screen.
 
 ![alt tag](./src/main/resources/images/image2017-2-26%201-49-52.png)
