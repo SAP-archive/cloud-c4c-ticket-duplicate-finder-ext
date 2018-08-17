@@ -2,19 +2,19 @@
 
 ## SAP Duplicate Tickets Finder Sample Application 
 
-SAP Hybris Cloud for Customer allows your company sales and support teams to engage with customers across multiple channels. You can use SAP Cloud Platform to develop, deploy and host and SAP Hybris Cloud for Customer extension applications, that simplify and differentiate your business processes.
+SAP Cloud for Customer allows your company sales and support teams to engage with customers across multiple channels. You can use SAP Cloud Platform to develop, deploy and host and SAP Hybris Cloud for Customer extension applications, that simplify and differentiate your business processes.
 
-SAP duplicate tickets finder is a sample extension application for SAP Hybris Cloud for Customer, that helps support employees in finding duplicate tickets reported for the same customer issues. 
+SAP duplicate tickets finder is a sample extension application for SAP Cloud for Customer, that helps support employees in finding duplicate tickets reported for the same customer issues. 
 
 ## Application Scenario
 
-Ticket processing is done by Service Agents in SAP Hybris Cloud for Customer. For most businesses, improving the customer service quality is a main component for success, driving loyalty and customer satisfaction. Main component for this is improving the efficiency of the Service Agents. Finding a solution of customer problems fast, reducing duplicate work for service request investigation and reacting on most common customer challenges adequately is an area for innovation that can be explored by extension application developers. 
+Ticket processing is done by Service Agents in SAP Cloud for Customer. For most businesses, improving the customer service quality is a main component for success, driving loyalty and customer satisfaction. Main component for this is improving the efficiency of the Service Agents. Finding a solution of customer problems fast, reducing duplicate work for service request investigation and reacting on most common customer challenges adequately is an area for innovation that can be explored by extension application developers. 
 
-Duplicate ticket finder sample application is focusing on this business case, by offering simple integrated solution to find and classify tickets reported or related to the same customer problem. The ultimate goal of the application is to demonstrate the technical integration points between SAP Hybris Cloud for Customer and SAP Cloud Platform Java Extension Applications in the context of a realistic business scenario. It can be used as a template for gaining knowledge on how to implement extension applications for SAP Hybris Cloud for Customer using SAP Cloud Platform. 
+Duplicate ticket finder sample application is focusing on this business case, by offering simple integrated solution to find and classify tickets reported or related to the same customer problem. The ultimate goal of the application is to demonstrate the technical integration points between SAP Cloud for Customer and SAP Cloud Platform Java Extension Applications in the context of a realistic business scenario. It can be used as a template for gaining knowledge on how to implement extension applications for SAP Hybris Cloud for Customer using SAP Cloud Platform. 
 
 The application use-case is:
 
-1. The customer files a new ticket in SAP Hybris Cloud for Customer describing the problem in the subject.
+1. The customer files a new ticket in SAP Cloud for Customer describing the problem in the subject.
 2. The Service Agent opens the customer ticket for processing and checks for suggested groups of similar tickets in the Duplicate Ticket Finder Widget.
 3. The Service Agent can open the suggested related tickets and inspect their statuses and proposed solutions.
 4. If the Service Agent finds that the ticket problem applies to a group of similar tickets, he or she might add his or her ticket to the group.
@@ -24,7 +24,7 @@ The application use-case is:
 
 ### Java-Based Extension Applications
 
-SAP duplicate ticket finder is a simple Java-based extension application, that demonstrates the integration capabilities, between SAP Hybris Cloud for Customer and SAP Cloud Platform.
+SAP duplicate ticket finder is a simple Java-based extension application, that demonstrates the integration capabilities, between SAP Cloud for Customer and SAP Cloud Platform.
 
 Implementing a Java-based extension application hosted on the SAP Cloud Platform allows developers to take full advantage of the platform capabilities and implement fully-fledged business processes. With the broad set of platform services at your disposal, your extension applications can expand into many scenarios that are impossible or impractical to achieve with an in-app extensibility. 
 
@@ -32,8 +32,8 @@ Implementing a Java-based extension application hosted on the SAP Cloud Platform
 
 Java-based extension applications have the following characteristics:
 * implement business logic and/or data processing in Java Web container hosted on the platform
-* consume SAP Hybris Cloud for Customer data using OData or SOAP APIs
-* provide back-end services for UI or SAP Hybris Cloud for Customer consumption
+* consume SAP Cloud for Customer data using OData or SOAP APIs
+* provide back-end services for UI or SAP Cloud for Customer consumption
 * can host secure and rich user interface, that can be either embedded or standalone
 
 ### Application Architecture
@@ -180,11 +180,11 @@ To consume data from an external system in SAP Hybris Cloud for Customer, you ne
 
 11. Close the mashup configuration screen.
       
-## Create and Configure an HTML Mashup of Duplicate Ticket Finder in SAP Hybris Cloud for Customer
+## Create and Configure an HTML Mashup of Duplicate Ticket Finder in SAP Cloud for Customer
 
 The benefit of using HTML Mashups for hosting HTML content instead of URL IFrame is that such content does not hit any third party cookie browser restrictions. 
 The downside is that the whole widget interface has to be contained in а single HTML page and the communication with the application back-end needs to happen through Web Service Mashups.
-The Duplicate Ticket Finder application provides such HTML mashup widget in the project, which needs to be configured and installed in SAP Hybris Cloud for Customer.
+The Duplicate Ticket Finder application provides such HTML mashup widget in the project, which needs to be configured and installed in SAP Cloud for Customer.
 1. In Eclipse IDE open the *cloud-c4c-ticker-duplicate-finder* application project.
 2. Open the *TicketFinderWidget.html* file in *scr/main/webapp* folder.
 
@@ -196,7 +196,7 @@ The Duplicate Ticket Finder application provides such HTML mashup widget in the 
             <MergeServiceID>	    Merge Service mashup service ID of the Web Service mashup            
 
 4. Save the file *TicketFinderWidget.html* text content in clipboard.
-5. Log on to the SAP Hybris Cloud for Customer system and chose *Adapt > Launch in Microsoft SilverLight* from the upper right menu.
+5. Log on to the SAP Hybris loud for Customer system and chose *Adapt > Launch in Microsoft SilverLight* from the upper right menu.
 6. From the *Administrator* menu select *MASHUP AUTHORING* to open mashup authoring screen.
 
 ![alt tag](./src/main/resources/images/image2017-2-26%2016-29-41.png)
@@ -269,8 +269,8 @@ If you want to dig into the application source code, for convenience we collecte
 | Class             |          Method | Description  |
 |-|-|-|
 |InitializeListener|contextInitialized|On application start loads initial set of tickets in the index.|
-|C4CTicketService|retrieveLastCreatedC4CTickets|Retrieves a set of latest tickets for SAP Hybris Cloud for Customer system.|
-||retrieveC4CTicketByID|Retrieves specific ticket from SAP Hybris Cloud for Customer system.|
+|C4CTicketService|retrieveLastCreatedC4CTickets|Retrieves a set of latest tickets for SAP Cloud for Customer system.|
+||retrieveC4CTicketByID|Retrieves specific ticket from SAP Cloud for Customer system.|
 |TicketResource|search|REST Service for finding similar tickets to the passed ticket.|
 ||merge|REST Service that adds ticket and his group to a group of similar tickets.|
 |IndexService|add|Adds new ticket to the index in its own group.|
