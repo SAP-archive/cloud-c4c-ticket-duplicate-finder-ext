@@ -78,14 +78,36 @@ The main focus is on the following integration points:
 
 ## Import and Build Duplicate Ticket Finder Application in Eclipse IDE
 
-1. In the *Eclipse IDE*, click on the *Open Perspective* button in the top right corner and choose Git. 
+1. In the *Eclipse IDE*, click on the *Open Perspective* button in the top right corner and choose Git.
 
-| ![Open Git Perspective](./src/main/resources/images/OpenGitPesrpective.png) |
+   ![Open Git Perspective](./src/main/resources/images/OpenGitPesrpective.png)
+2. Select Clone a Git repository from *Git Repositories* view. 
 
-1. Clone the Git repository https://github.com/SAP/cloud-c4c-ticket-duplicate-finder-ext.git
-In Eclipse import the project as an *Existing Maven Project* and point to the *pom.xml* file located in *cloud-c4c-ticket-duplicate-finder* folder.
+   ![Clone Git Repository](./src/main/resources/images/CloneGitRepo.png)
+3. Enter https://github.com/SAP/cloud-c4c-ticket-duplicate-finder-ext.git in the URI field and choose *Next*.
 
-2. Build the project by using *Maven Build* option on the *pom.xml* with the goal *clean install*.
+   ![Clone Git Repository URL](./src/main/resources/images/CloneGitRepoURL.png)
+4. Select the *teched_2018* branch and choose *Next*.
+
+   ![Select branch](./src/main/resources/images/GitBranchSelect.png)
+5. Set the *Directory* field and choose *Finish*. Take a note of that directory – we will refer to it as Project Folder later in the exercises.
+
+   ![Set project directory](./src/main/resources/images/GitProjectFolderSelect.png)
+6. Click again on the *Open Perspective* button in the top right corner and choose *Java EE*.
+
+   ![Open Java EE Perspective](./src/main/resources/images/OpenJavaEE.png)
+7. Choose *File* > *Import…* > *Maven* > *Existing Maven Projects* and choose *Next*. 
+
+   ![Import Maven Project](./src/main/resources/images/ImportMavenProject.png) 
+8. Browse and select the *Project Folder* where you have cloned the Git repository and choose *Finish*. Wait for the project to load.
+
+   ![Import Maven Project](./src/main/resources/images/SelectMavenProject.png) 
+9. From the project context menu, choose *Run As* > *Maven build*. Enter *clean install* in the *Goals* field and choose Run. 
+
+   You should see a “BUILD SUCCESS” message in the Console view.
+
+   ![Build Maven Project](./src/main/resources/images/MavenBuild.png)
+   
 
 ## Deploy the application on the SAP Cloud Platform Extension Account
 
