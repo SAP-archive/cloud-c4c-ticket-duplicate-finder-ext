@@ -1,16 +1,31 @@
 # cloud-c4c-ticket-duplicate-finder
 
-## SAP Duplicate Tickets Finder Sample Application 
+## Introduction
 
-SAP Cloud for Customer allows your company sales and support teams to engage with customers across multiple channels. You can use SAP Cloud Platform to develop, deploy and host and SAP Cloud for Customer extension applications, that simplify and differentiate your business processes.
+SAP Cloud for Customer allows your company sales and support teams to engage with customers across multiple channels. You can use SAP Cloud Platform to develop, deploy and host SAP Cloud for Customer extension applications that simplify and differentiate your business processes. 
 
-SAP duplicate tickets finder is a sample extension application for SAP Cloud for Customer, that helps support employees in finding duplicate tickets reported for the same customer issues. 
+The sample extension application for SAP Hybris Cloud for Customer that we’ll be working with today – *SAP Duplicate Ticket Finder* – helps support employees in finding duplicate tickets reported for the same customer issues.
+
+## Extension Applications Overview
+
+SAP duplicate ticket finder is a simple Java-based extension application, that demonstrates the integration capabilities, between SAP Cloud for Customer and SAP Cloud Platform.
+
+Implementing extension application hosted on the SAP Cloud Platform allows developers to take full advantage of the platform capabilities and implement fully-fledged business processes. With the broad set of platform services at your disposal, your extension applications can expand into many scenarios that are impossible or impractical to achieve with an in-app extensibility.
+
+![alt tag](./src/main/resources/images/ApplicationTypes.png)
+
+Extension applications have the following characteristics:
+* implement business logic and/or data processing in Java Web container hosted on the platform
+* consume SAP Cloud for Customer data using OData or SOAP APIs
+* provide back-end services for UI or SAP Cloud for Customer consumption
+* can host secure and rich user interface, that can be either embedded or standalone
+
 
 ## Application Scenario
 
-Ticket processing is done by Service Agents in SAP Cloud for Customer. For most businesses, improving the customer service quality is a main component for success, driving loyalty and customer satisfaction. Main component for this is improving the efficiency of the Service Agents. Finding a solution of customer problems fast, reducing duplicate work for service request investigation and reacting on most common customer challenges adequately is an area for innovation that can be explored by extension application developers. 
+Ticket processing is done by Service Agents in SAP Cloud for Customer. For most businesses, improving the customer service quality is a main component for success, driving loyalty and customer satisfaction. Main component for this is improving the efficiency of the Service Agents. A key enabler for achieving this is improving the efficiency of the Service Agents. Finding a solution to customer problems fast, reducing duplicate work for service request investigation and reacting on most common customer challenges adequately is an area for innovation that can be explored by extension application developers. 
 
-Duplicate ticket finder sample application is focusing on this business case, by offering simple integrated solution to find and classify tickets reported or related to the same customer problem. The ultimate goal of the application is to demonstrate the technical integration points between SAP Cloud for Customer and SAP Cloud Platform Java Extension Applications in the context of a realistic business scenario. It can be used as a template for gaining knowledge on how to implement extension applications for SAP Cloud for Customer using SAP Cloud Platform. 
+Duplicate ticket finder sample application is focusing on this business case, by offering simple integrated solution to find and classify tickets reported or related to the same customer problem. The ultimate goal of the application is to demonstrate the technical integration points between SAP Cloud for Customer and SAP Cloud Platform Extension Applications in the context of a realistic business scenario. It can be used as a template for gaining knowledge on how to implement extension applications for SAP Cloud for Customer using SAP Cloud Platform. 
 
 The application use-case is:
 
@@ -20,27 +35,11 @@ The application use-case is:
 4. If the Service Agent finds that the ticket problem applies to a group of similar tickets, he or she might add his or her ticket to the group.
 5. Other Service Agents immediately see the new ticket in the group and can reuse the proposed solution.
 
-## Architecture Overview
-
-### Java-Based Extension Applications
-
-SAP duplicate ticket finder is a simple Java-based extension application, that demonstrates the integration capabilities, between SAP Cloud for Customer and SAP Cloud Platform.
-
-Implementing a Java-based extension application hosted on the SAP Cloud Platform allows developers to take full advantage of the platform capabilities and implement fully-fledged business processes. With the broad set of platform services at your disposal, your extension applications can expand into many scenarios that are impossible or impractical to achieve with an in-app extensibility. 
-
-![alt tag](./src/main/resources/images/ApplicationTypes.png)
-
-Java-based extension applications have the following characteristics:
-* implement business logic and/or data processing in Java Web container hosted on the platform
-* consume SAP Cloud for Customer data using OData or SOAP APIs
-* provide back-end services for UI or SAP Cloud for Customer consumption
-* can host secure and rich user interface, that can be either embedded or standalone
-
-### Application Architecture
+## Application Architecture Details
 
 Service requests filled by people are usually a mixture of both structured and unstructured information. Finding semantic similarities between two tickets is non-trivial task, that might employ many technology tools - ticket metadata analysis, text heuiristic analysis and even machine learning.
 
-The application implements very simple algorithm which uses the ticket description as indicator for similarities. It uses OData APIs to extract the tickets from the Cloud for Customer system and builds [Lucene](https://lucene.apache.org/core/) in-memory index. When new ticket is created it gets added to the index. When two tickets are catergorized by users as duplicate they get merged in the index, so they appear in the same group. All data is kept in memory, so the index gets lost after application restart.
+SAP Duplicate Ticket Finder implements very simple algorithm which uses the ticket description as indicator for similarities. It uses OData APIs to extract the tickets from the Cloud for Customer system and builds [Lucene](https://lucene.apache.org/core/) in-memory index. When new ticket is created it gets added to the index. When two tickets are catergorized by users as duplicate they get merged in the index, so they appear in the same group. All data is kept in memory, so the index gets lost after application restart.
 
 The UI is implemented as native HTML mashup in SAP Cloud for Customer. In order to connect to the Java backend logic, it uses 2 Web Service mashups, which obtain the groups of similar tickets to the current ticket and allow  the user to add the current ticket to existing group of duplicates.
 
@@ -58,17 +57,13 @@ The main focus is on the following integration points:
 
 ## Prerequisites
 
-* SAP Cloud for Customer tenant and user with administrative privileges for performing the configurations
-* SAP Cloud for Customer service agent user credentials
-* SAP Cloud Platform account configured for SAP Cloud for Customer extensions. Follow the SAP Cloud Platform documentation for [Extending SAP Cloud for Customer](https://help.sap.com/viewer/462e41a242984577acc28eae130855ad/Cloud/en-US) on how to configure the integration. The following integration need to be configured between the two systems: 
-  * Single-Sign-On between the SAP Cloud Platform Account and the SAP Cloud for Customer tenant
-  * OAuth identity provider trust is configured between SAP Cloud for Customer tenant and SAP Cloud Platform Application Account 
-* Browser with Microsoft Silverlight Plugin Installed (Google Chrome does not support Microsoft Silverlight)
-  * Internet Explorer or Mozilla Firefox for Windows
-  * Mozilla Firefox or Safari for Mac 
-* Eclipse IDE for Java EE Developers, Neon version
+* SAP Cloud for Customer tenant and user with administrative privileges for performing the required configurations
+* SAP Cloud for Customer service agent user credentials required for asynchronous access to tickets
+* SAP Cloud Platform Extension subaccount for SAP Cloud for Customer extensions. To configure such subaccount follow the SAP Cloud Platform documentation for [extending SAP Cloud for Customer](https://help.sap.com/viewer/462e41a242984577acc28eae130855ad/Cloud/en-US).  
+* Browser with HTML5 Support 
+* Eclipse IDE for Java EE Developers - Oxygen version
 * Java SE Development Kit (JDK, not JRE), version 8
-* SAP Cloud Platform Tools for Eclipse: https://tools.hana.ondemand.com/neon
+* SAP Cloud Platform Tools for Eclipse: https://tools.hana.ondemand.com/oxygen/
 * SAP Cloud Platform SDK: https://tools.hana.ondemand.com/
 
 ## Installation Steps
@@ -81,7 +76,11 @@ The main focus is on the following integration points:
 * Create and configure HTML Mashup Interface in SAP Cloud for Customer for your application.
 * Embed the application interface in SAP Cloud for Customer UI.
 
-## Get the Source Code and Build the Project
+## Import and Build Duplicate Ticket Finder Application in Eclipse IDE
+
+Explanation | Screenshot
+--- | ---
+1. In the *Eclipse IDE*, click on the *Open Perspective* button in the top right corner and choose Git. | ![Open Git Perspective](./src/main/resources/images/OpenGitPesrpective.png)
 
 1. Clone the Git repository https://github.com/SAP/cloud-c4c-ticket-duplicate-finder-ext.git
 In Eclipse import the project as an *Existing Maven Project* and point to the *pom.xml* file located in *cloud-c4c-ticket-duplicate-finder* folder.
