@@ -4,7 +4,7 @@
 
 SAP Cloud for Customer allows your company sales and support teams to engage with customers across multiple channels. You can use SAP Cloud Platform to develop, deploy and host SAP Cloud for Customer extension applications that simplify and differentiate your business processes. 
 
-The sample extension application for SAP Hybris Cloud for Customer that we�ll be working with today � *SAP Duplicate Ticket Finder* � helps support employees in finding duplicate tickets reported for the same customer issues.
+The sample extension application for SAP Hybris Cloud for Customer that we’ll be working with today – *SAP Duplicate Ticket Finder* – helps support employees in finding duplicate tickets reported for the same customer issues.
 
 ## Extension Applications Overview
 
@@ -78,9 +78,9 @@ The main focus is on the following integration points:
 
 ## Import and Build Duplicate Ticket Finder Application in Eclipse IDE
 
-Explanation | Screenshot
---- | ---
-1. In the *Eclipse IDE*, click on the *Open Perspective* button in the top right corner and choose Git. | ![Open Git Perspective](./src/main/resources/images/OpenGitPesrpective.png)
+| Explanation | Screenshot |
+| --- | --- |
+| 1. In the *Eclipse IDE*, click on the *Open Perspective* button in the top right corner and choose Git. | ![Open Git Perspective](./src/main/resources/images/OpenGitPesrpective.png) |
 
 1. Clone the Git repository https://github.com/SAP/cloud-c4c-ticket-duplicate-finder-ext.git
 In Eclipse import the project as an *Existing Maven Project* and point to the *pom.xml* file located in *cloud-c4c-ticket-duplicate-finder* folder.
@@ -182,7 +182,7 @@ To consume data from an external system in SAP Cloud for Customer, you need to c
 ## Create and Configure an HTML Mashup of Duplicate Ticket Finder in SAP Cloud for Customer
 
 The benefit of using HTML Mashups for hosting HTML content instead of URL IFrame is that such content does not hit any third party cookie browser restrictions. 
-The downside is that the whole widget interface has to be contained in а single HTML page and the communication with the application back-end needs to happen through Web Service Mashups.
+The downside is that the whole widget interface has to be contained in Ð° single HTML page and the communication with the application back-end needs to happen through Web Service Mashups.
 The Duplicate Ticket Finder application provides such HTML mashup widget in the project, which needs to be configured and installed in SAP Cloud for Customer.
 1. In Eclipse IDE open the *cloud-c4c-ticker-duplicate-finder* application project.
 2. Open the *TicketFinderWidget.html* file in *scr/main/webapp* folder.
@@ -282,7 +282,7 @@ If you want to dig into the application source code, for convenience we collecte
 ### Copyright and License
 
 ```
-© 2017 [SAP SE](http://www.sap.com/)
+Â© 2017 [SAP SE](http://www.sap.com/)
 
 Licensed under the Apache License, Version 2.0 (the "License"); 
 you may not use this work except in compliance with the License. 
