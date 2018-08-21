@@ -4,7 +4,7 @@
 
 SAP Cloud for Customer allows your company sales and support teams to engage with customers across multiple channels. You can use SAP Cloud Platform to develop, deploy and host SAP Cloud for Customer extension applications that simplify and differentiate your business processes. 
 
-The sample extension application for SAP Hybris Cloud for Customer that weâ€™ll be working with today â€“ *SAP Duplicate Ticket Finder* â€“ helps support employees in finding duplicate tickets reported for the same customer issues.
+The sample extension application for SAP Hybris Cloud for Customer that weâ€™ll be working with today - *SAP Duplicate Ticket Finder* - helps support employees in finding duplicate tickets reported for the same customer issues.
 
 ## Extension Applications Overview
 
@@ -23,7 +23,7 @@ Extension applications have the following characteristics:
 
 ## Application Scenario
 
-Ticket processing is done by Service Agents in SAP Cloud for Customer. For most businesses, improving the customer service quality is a main component for success, driving loyalty and customer satisfaction. Main component for this is improving the efficiency of the Service Agents. A key enabler for achieving this is improving the efficiency of the Service Agents. Finding a solution to customer problems fast, reducing duplicate work for service request investigation and reacting on most common customer challenges adequately is an area for innovation that can be explored by extension application developers. 
+Ticket processing is done by Service Agents in SAP Cloud for Customer. For most businesses, improving the customer service quality is a main component for success, driving loyalty and customer satisfaction. Main component for this is improving the efficiency of the Service Agents. A key enabler for achieving this is improving the efficiency of the Service Agents. Finding a solution to customer problems fast, reducing duplicate work for service request investigation and reacting on most common customer challenges adequately is an area for innovation that can be explored by extension application developers.
 
 Duplicate ticket finder sample application is focusing on this business case, by offering simple integrated solution to find and classify tickets reported or related to the same customer problem. The ultimate goal of the application is to demonstrate the technical integration points between SAP Cloud for Customer and SAP Cloud Platform Extension Applications in the context of a realistic business scenario. It can be used as a template for gaining knowledge on how to implement extension applications for SAP Cloud for Customer using SAP Cloud Platform. 
 
@@ -90,13 +90,13 @@ The main focus is on the following integration points:
 4. Select the *teched_2018* branch and choose *Next*.
 
    ![Select branch](./src/main/resources/images/GitBranchSelect.png)
-5. Set the *Directory* field and choose *Finish*. Take a note of that directory – we will refer to it as Project Folder later in the exercises.
+5. Set the *Directory* field and choose *Finish*. Take a note of that directory ï¿½ we will refer to it as Project Folder later in the exercises.
 
    ![Set project directory](./src/main/resources/images/GitProjectFolderSelect.png)
 6. Click again on the *Open Perspective* button in the top right corner and choose *Java EE*.
 
    ![Open Java EE Perspective](./src/main/resources/images/OpenJavaEE.png)
-7. Choose *File* > *Import…* > *Maven* > *Existing Maven Projects* and choose *Next*. 
+7. Choose *File* > *Importï¿½* > *Maven* > *Existing Maven Projects* and choose *Next*. 
 
    ![Import Maven Project](./src/main/resources/images/ImportMavenProject.png) 
 8. Browse and select the *Project Folder* where you have cloned the Git repository and choose *Finish*. Wait for the project to load.
@@ -104,7 +104,7 @@ The main focus is on the following integration points:
    ![Import Maven Project](./src/main/resources/images/SelectMavenProject.png) 
 9. From the project context menu, choose *Run As* > *Maven build*. Enter *clean install* in the *Goals* field and choose Run. 
 
-   You should see a “BUILD SUCCESS” message in the Console view.
+   You should see a ï¿½BUILD SUCCESSï¿½ message in the Console view.
 
    ![Build Maven Project](./src/main/resources/images/MavenBuild.png)
    
