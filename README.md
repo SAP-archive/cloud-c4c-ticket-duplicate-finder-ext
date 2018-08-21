@@ -80,7 +80,7 @@ The main focus is on the following integration points:
 
 1. In the *Eclipse IDE*, click on the *Open Perspective* button in the top right corner and choose Git. 
 
-![Open Git Perspective](./src/main/resources/images/OpenGitPesrpective.png)
+| ![Open Git Perspective](./src/main/resources/images/OpenGitPesrpective.png) |
 
 1. Clone the Git repository https://github.com/SAP/cloud-c4c-ticket-duplicate-finder-ext.git
 In Eclipse import the project as an *Existing Maven Project* and point to the *pom.xml* file located in *cloud-c4c-ticket-duplicate-finder* folder.
