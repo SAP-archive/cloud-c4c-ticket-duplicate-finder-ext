@@ -130,7 +130,7 @@ The main focus is on the following integration points:
 
    Choose *Deploy*.
 
-   ![Deploy application](./src/main/resources/images/deployApplication.png)
+   ![Deploy application](./src/main/resources/images/DeployApplication.png)
 
 5. Do NOT start the application at this point. Choose *Done*.
    
