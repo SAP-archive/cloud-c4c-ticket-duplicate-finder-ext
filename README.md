@@ -59,7 +59,7 @@ The main focus is on the following integration points:
 
 * SAP Cloud for Customer tenant and user with administrative privileges for performing the required configurations
 * SAP Cloud for Customer service agent user credentials required for asynchronous access to tickets
-* SAP Cloud Platform Extension subaccount for SAP Cloud for Customer extensions. To configure such subaccount follow the SAP Cloud Platform documentation for [extending SAP Cloud for Customer](https://help.sap.com/viewer/462e41a242984577acc28eae130855ad/Cloud/en-US).  
+* SAP Cloud Platform Extension subaccount for SAP Cloud for Customer extensions. To configure such subaccount follow the SAP Cloud Platform documentation for [Extending SAP Cloud for Customer](https://help.sap.com/viewer/462e41a242984577acc28eae130855ad/Cloud/en-US).  
 * Browser with HTML5 Support 
 * Eclipse IDE for Java EE Developers - Oxygen version
 * Java SE Development Kit (JDK, not JRE), version 8
@@ -90,13 +90,13 @@ The main focus is on the following integration points:
 4. Select the *teched_2018* branch and choose *Next*.
 
    ![Select branch](./src/main/resources/images/GitBranchSelect.png)
-5. Set the *Directory* field and choose *Finish*. Take a note of that directory � we will refer to it as Project Folder later in the exercises.
+5. Set the *Directory* field and choose *Finish*. Take a note of that directory, we will refer to it as *Project Folder* later in the exercises.
 
    ![Set project directory](./src/main/resources/images/GitProjectFolderSelect.png)
 6. Click again on the *Open Perspective* button in the top right corner and choose *Java EE*.
 
    ![Open Java EE Perspective](./src/main/resources/images/OpenJavaEE.png)
-7. Choose *File* > *Import�* > *Maven* > *Existing Maven Projects* and choose *Next*. 
+7. Choose *File* > *Import* > *Maven* > *Existing Maven Projects* and choose *Next*. 
 
    ![Import Maven Project](./src/main/resources/images/ImportMavenProject.png) 
 8. Browse and select the *Project Folder* where you have cloned the Git repository and choose *Finish*. Wait for the project to load.
@@ -104,23 +104,37 @@ The main focus is on the following integration points:
    ![Import Maven Project](./src/main/resources/images/SelectMavenProject.png) 
 9. From the project context menu, choose *Run As* > *Maven build*. Enter *clean install* in the *Goals* field and choose Run. 
 
-   You should see a �BUILD SUCCESS� message in the Console view.
+   You should see a **BUILD SUCCESS** message in the Console view.
 
    ![Build Maven Project](./src/main/resources/images/MavenBuild.png)
    
 
-## Deploy the application on the SAP Cloud Platform Extension Account
+## Deploy the Application via the SAP Cloud Platform Cockpit
 
-1. Deploy the application in the cockpit. See https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/abded969628240259d486c4b29b3948c.html
+1. In the onboarding page, click on the *SAP Cloud Platform Subaccount* link. The SAP Cloud Platform Cockpit is loaded.
+   
+   ![Open subaccount link](./src/main/resources/images/OpenSubaccountLink.png)
 
-Use these settings: 
+2. Choose *User information* in the top right corner and note your S/P-user ID.
 
-            WAR File Location:  ROOT.war (it is in your Ecplipse project *target* folder)
-            Application Name:   ticketfinder
-            Runtime:            Java Web Tomcat 8
-            JRE Version:        JRE8
-    
-**Note: Do not start the application at this point.**
+   ![Open subaccount link](./src/main/resources/images/userInfo.png)
+
+3. In the left-hand navigation menu, choose *Applications* > *Java Applications*.
+
+4. Choose *Deploy Application* and in the dialog box that appears, enter the following values:
+
+    - WAR File Location: ROOT.war in your Eclipse <Project Folder>/target folder  
+    - Application Name: tdf<your s/p-user ID> (only lowercase letters, e.g. tdfp1234567890)
+    - Runtime Name: Java Web Tomcat 8
+    - JVM Version: JRE 8
+
+   Choose *Deploy*.
+
+   ![Deploy application](./src/main/resources/images/deployApplication.png)
+
+5. Do NOT start the application at this point. Choose *Done*.
+   
+   ![Deploy completed](./src/main/resources/images/DeployCompleted.png)
 
 ## Configuring the Application Connectivity to SAP Cloud for Customer OData API Using Technical User
 
