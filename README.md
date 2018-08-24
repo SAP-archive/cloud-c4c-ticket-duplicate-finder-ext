@@ -121,8 +121,7 @@ The main focus is on the following integration points:
 
 3. In the left-hand navigation menu, choose *Applications* > *Java Applications*.
 
-4. Choose *Deploy Application* and in the dialog box that appears, enter the following values:
-
+4. Choose *Deploy Application* and in the dialog box that appears, enter the following values:  
     - WAR File Location: ROOT.war in your Eclipse <Project Folder>/target folder  
     - Application Name: tdf<your s/p-user ID> (only lowercase letters, e.g. tdfp1234567890)
     - Runtime Name: Java Web Tomcat 8
@@ -318,7 +317,7 @@ If you want to dig into the application source code, for convenience we collecte
 ### Copyright and License
 
 ```
-Â© 2017 [SAP SE](http://www.sap.com/)
+Copyright 2017 [SAP SE](http://www.sap.com/)
 
 Licensed under the Apache License, Version 2.0 (the "License"); 
 you may not use this work except in compliance with the License. 
