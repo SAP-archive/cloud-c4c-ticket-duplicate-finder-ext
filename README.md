@@ -121,8 +121,9 @@ The main focus is on the following integration points:
 
 3. In the left-hand navigation menu, choose *Applications* > *Java Applications*.
 
-4. Choose *Deploy Application* and in the dialog box that appears, enter the following values:  
-    - WAR File Location: ROOT.war in your Eclipse <Project Folder>/target folder  
+4. Choose *Deploy Application* and in the dialog box that appears, enter the following values:
+
+    - WAR File Location: ROOT.war in your Eclipse <Project Folder>/target folder
     - Application Name: tdf<your s/p-user ID> (only lowercase letters, e.g. tdfp1234567890)
     - Runtime Name: Java Web Tomcat 8
     - JVM Version: JRE 8
@@ -137,8 +138,43 @@ The main focus is on the following integration points:
 
 ## Configuring the Application Connectivity to SAP Cloud for Customer OData API Using Technical User
 
-The application uses Service to Service connectivity with technical user to replicate and index the ticket information from the SAP Cloud for Customer system.
-During startup it replicates the last 20 tickets in the system and adds them in the index. You need to configure connectivity to SAP Cloud for Customer system for your application by creating the required destination. You can use the dedicated service agent credentials - C4C credentials of a user that can see and process Service Request tickets.
+The application replicates and indexes the ticket information from the SAP Cloud for Customer system using OData API. During startup it replicates the last 20 tickets in the system and adds them in the index.
+
+You need to configure the API access to SAP Cloud for Customer system for your application by creating the required OAuth client and SAP Cloud Platform destination.
+
+1. For configuring OAuth client you need to know the Service Provider name of your SAP Cloud Platform subaccount.
+
+   Open your subaccount and chose *Secirity* > *Trust* from the left menu. Note the value of *Local Provider Name* in *Trust Management* settings.
+   
+   ![SAP CP Service Provider Name](./src/main/resources/images/CheckSAPCPSPName.png)
+
+2. Logon to SAP Cloud for Customer System and choose *ADMINISTRATOR* > *OAUTH2.0 CLIENT REGISTRATION* and select *New*
+
+   ![OAuth Clients View](./src/main/resources/images/OAuth2C4CView.png)
+
+3. On OAuth 2.0 Client Registration screen configure the client parameters:
+
+    - *Client ID* is automatically generated client identifier. You will need to remember this for SAP Cloud Platform destination configuration.
+    - *Client Secret* - Enter your secred. You will need to remember this for SAP Cloud Platform destination configuration.
+    - *Description* - Suitable description for your client. Use : "<ApplicationName> Client" (e.g "tdfp0123456789 Client").
+    - *Issuer Name* - Select your SAP Cloud Platform Subaccount Service Provider. This is configured as OAuth 2.0 Identity Provider in SAP Cloud for Customer.
+    - *Scope* - Under scope select *UIWC:CC_HOME*
+
+   Choose *Save and Close* after the configuration is complete.
+
+   ![OAuth Client Create](./src/main/resources/images/C4COAuthClientCreation.png)
+
+4. For configuring OAuth destination in SAP Cloud Platform you need to know the Service Provider name of your SAP Cloud for Customer tenant.
+
+   Logon to SAP Cloud for Customer System and choose *ADMINISTRATOR* > *COMMON TASKS* and select *Configure Single Sign-On*
+
+   ![C4C SSO Page](./src/main/resources/images/C4CSSOPage.png)
+
+5. Note the *SAP Cloud for Customer Service Provider* name from *Local Service Provider* property in *Configure Single Sign-On* screen.
+
+   ![C4C SSO Page](./src/main/resources/images/C4CServiceProvider.png)
+
+6. 
 
 1. Open the Destination template, you can find it in the project resource folder.
 

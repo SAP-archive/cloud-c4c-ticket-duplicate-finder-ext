@@ -17,7 +17,7 @@ public class C4CTicketService {
 	
 	private static final String QUERY_PATH = "{0}%20eq%20%27{1}%27{2}";
 	private static final String SELECT_QUERY_PATH = "&$select=ID,ObjectID,Name,ServicePriorityCodeText,ItemListServiceRequestExecutionLifeCycleStatusCodeText";
-	private static final String DESTINATION_NAME = "sap_cloud4customer_core_odata_basic";
+	private static final String DESTINATION_NAME = "sap_cloud4customer_odata";
 	private static final String FILTER_BY_ID_QUERY_PATH = "ServiceRequestCollection?$filter=ID";
 	private static final String FILTER_BY_OBJECT_ID_QUERY_PATH = "ServiceRequestCollection?$filter=ObjectID";
 	private static final String OBJECT_ID_JSON_NODE = "ObjectID";
