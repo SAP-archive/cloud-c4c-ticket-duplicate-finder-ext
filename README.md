@@ -202,66 +202,67 @@ You need to configure the API access to SAP Cloud for Customer system for your a
 
    *Note: The service endpoint URLs are used in the next steps, so it is a good idea to keep the page open.*
 
-## Configuring Web Service Mashups in SAP Cloud for Customer System
+## Create and Configure Web Service Mashups in SAP Cloud for Customer
 
 To consume data from an external system in SAP Cloud for Customer, you need to create and configure Web Service Mashups for the requested services.
 
-1. Log on to the SAP Cloud for Customer system and chose *Adapt > Launch in Microsoft SilverLight* from the upper right menu.
-2. From the *Administrator* menu select *MASHUP WEB SERVICES*.
+1. Logon to the SAP Cloud for Customer system and chose *ADMINISTRATOR* > *BUSINESS FLEXIBILITY* > *Masup Web Services* from the top menu.
 
-![alt tag](./src/main/resources/images/image2017-2-26%202-52-33.png)
+   ![Open Mashup Web Services](./src/main/resources/images/OpenMashupWebServices.png)
 
-3. Create new REST Service from *MASHUP WEB SERVICES* screen.
+2. Create new REST Service from *MASHUP WEB SERVICES* screen.
 
-![alt tag](./src/main/resources/images/image2017-2-26%203-10-36.png)
+   ![New REST Service](./src/main/resources/images/NewRESTMashup.png)
 
-4. In the New Mashup configuration set up the Search Service consumption.
+3. In the New Mashup configuration set up the *Search Service* consumption.
 
-            Service Name:           search-ticket-duplicate-finder
-            Status:                 Active
-            Authentication Method:  None
-            Service Protocol:       JSON
-            HTTP Method:            GET
-            URL: Set the URL of Application Search Service from the home page of your application: for example,
-            https://[Application Host]/api/v1/ticket/search/{ticketId}
-            
-5. Click on *Extract Parameters* to configure the service input parameters.
+    - Service Name - search-ticket-duplicate-finder
+    - Authentication Method - None
+    - Service Protocol - JSON
+    - HTTP Method - GET
+    - URL - Search Service URL from your application homepage
 
-![alt tag](./src/main/resources/images/image2017-2-26%203-12-5.png)
+   Click on *Extract Parameters* to configure the service input parameters and *Save* the mashup.
 
-6. Save the mashup and copy locally the Search Service mashup Service ID that is generated to use it later on.
+   ![Configure Search Mashup](./src/main/resources/images/SearchMashup.png)
 
-![alt tag](./src/main/resources/images/image2017-2-26%203-20-53.png)
+6. *Activate* the mashup and write down its *Search Service ID* for later use.
 
-7. Close the mashup configuration screen.
-8. Create another new REST Service from *MASHUP WEB SERVICES* screen.
-9. In the New Mashup configuration set up the Merge Service consumption.
+   ![Activate Search Mashup](./src/main/resources/images/ActivateSearchMashup.png)
 
-            Service Name:             merge-ticket-duplicate-finder
-            Status:                   Active
-            Authentication Method:    None
-            Service Protocol:         JSON
-            HTTP Method:              POST
-            Content-type:             FORM
-            URL: Set the URL of Application Merge Service: for example,
-            https://[Application Host]/api/v1/ticket/merge
-      
-            Add two Input Parameters:
-            
-                  i. currentId
-                  ii. duplicateId
+7. After making sure the mashup is active *Close* the mashup configuration screen.   
 
-10. Save the mashup and copy locally the Merge Service mashup Service ID to use it later on. 
+   ![Close Search Mashup](./src/main/resources/images/CloseSearchMashup.png)
 
-![alt tag](./src/main/resources/images/image2017-2-26%203-34-53.png)
+8. Create another new *REST Service* from *MASHUP WEB SERVICES* screen.
+
+   ![New REST Service](./src/main/resources/images/NewRESTMashup.png)
+
+9. In the New Mashup configuration set up the *Merge Service* consumption.
+
+    - Service Name:             merge-ticket-duplicate-finder
+    - Authentication Method:    None
+    - Service Protocol:         JSON
+    - HTTP Method:              POST
+    - Content-type:             FORM
+    - URL: Merge Service URL from your application homepage
+    - Add two Input Parameters:
+       - currentId
+       - duplicateId
+
+   *Save*, *Activate* the merge mashup and write down its generated *Merge Service ID* for later use.
+
+   ![Configure Merge Mashup](./src/main/resources/images/MergeMashup.png)
 
 11. Close the mashup configuration screen.
       
 ## Create and Configure an HTML Mashup of Duplicate Ticket Finder in SAP Cloud for Customer
 
 The benefit of using HTML Mashups for hosting HTML content instead of URL IFrame is that such content does not hit any third party cookie browser restrictions. 
-The downside is that the whole widget interface has to be contained in Ð° single HTML page and the communication with the application back-end needs to happen through Web Service Mashups.
-The Duplicate Ticket Finder application provides such HTML mashup widget in the project, which needs to be configured and installed in SAP Cloud for Customer.
+The downside is that the whole widget interface has to be contained in a single HTML page and the communication with the application back-end needs to happen through Web Service Mashups.
+
+The Duplicate Ticket Finder application provides such HTML mashup widget in the eclipse project, which needs to be configured and installed in SAP Cloud for Customer.
+
 1. In Eclipse IDE open the *cloud-c4c-ticker-duplicate-finder* application project.
 2. Open the *TicketFinderWidget.html* file in *scr/main/webapp* folder.
 
