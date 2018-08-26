@@ -1,8 +1,0 @@
-Name=sap_cloud4customer_core_odata_basic
-URL=https\://<C4C Host>/sap/c4c/odata/v1/c4codata
-ProxyType=Internet
-Type=HTTP
-CloudConnectorVersion=2
-Authentication=BasicAuthentication
-User=<C4C User>
-Password=<C4C Password>

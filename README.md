@@ -140,7 +140,7 @@ The main focus is on the following integration points:
 
 The application replicates and indexes the ticket information from the SAP Cloud for Customer system using OData API. During startup it replicates the last 20 tickets in the system and adds them in the index.
 
-You need to configure the API access to SAP Cloud for Customer system for your application by creating the required OAuth client and SAP Cloud Platform destination.
+You need to configure the API access to SAP Cloud for Customer system for your application by creating the required OAuth client and SAP Cloud Platform destination. You also need a service user with permissions for accessing the service tickets.
 
 1. For configuring OAuth client you need to know the Service Provider name of your SAP Cloud Platform subaccount.
 
@@ -170,30 +170,37 @@ You need to configure the API access to SAP Cloud for Customer system for your a
 
    ![C4C SSO Page](./src/main/resources/images/C4CSSOPage.png)
 
-5. Note the *SAP Cloud for Customer Service Provider* name from *Local Service Provider* property in *Configure Single Sign-On* screen.
+   Note the *SAP Cloud for Customer Service Provider* name from *Local Service Provider* property in *Configure Single Sign-On* screen.
 
    ![C4C SSO Page](./src/main/resources/images/C4CServiceProvider.png)
 
-6. 
+5. Open subaccount overvew in SAP Cloud Platform Cockpit. In the left-hand navigation menu, choose *Applications* > *Java Applications*, then choose your application in the list of Java applications.
 
-1. Open the Destination template, you can find it in the project resource folder.
+   ![Open Java Application](./src/main/resources/images/SelectJavaApplication.png)
 
-![alt tag](./src/main/resources/images/image2017-2-26%202-36-30.png)
+6. In the left-hand navigation menu, choose *Configuration* > *Destinations*, then *Import Destination*.
 
-2. Replace the following variables in the destination file:
+   Choose the *sap_cloud4customer_odata.txt* template file in the <Project Folder>/src/main/resources folder and configure the following values:
 
-            <C4C Host>:	     your SAP Cloud for Customer system host.
-            <C4C User>:	     your SAP Cloud for Customer service agent user.
-            <C4C Password>:	 your SAP Cloud for Customer service agent password.
-                  
-3. Import this destination file on application level for your application in SAP Cloud Clockpit. Go to your application in SAP Cloud Platform Cockpit: *Configuration > Destinations > Import Destination*.
+    - *URL* - SAP Hybris Cloud for Customer API URL. Replace *"<C4C Host>"* with your SAP Cloud for Customer API host name. Check the onboarding page for API URL reference
+    - *Audience* - SAP Cloud for Customer Service Provider name. (Use exact copy of the url do not change any letters e.g. *HTTPS://my328096-sso.crm.ondemand.com*
+    - *Client Key* - OAuth Client ID you created for your application
+    - *Token Service URL* - SAP Hybris Cloud for Customer Token Service URL. Replace *"<C4C Host>"* with your SAP Cloud for Customer API host name
+    - *Token Service User* - OAuth Client ID you created for your application
+    - *Token Service Password* - OAuth Client secred you defined for your application
+    - *System User* - User ID of the service user from which behalf the application will be accessing the tickets e.g. SERVICEAGENT01
 
-![alt tag](./src/main/resources/images/image2017-2-26%202-42-11.png)
+   Choose *Save*.
 
-4. Start your application from SAP Cloud Platform Cockpit and after it is started open the application home page in a browser.
-      Upon start the application connects to the SAP Cloud for Customer back-end and replicates and index the last 20 tickets. Opening the home page shows the services exposed by the application and status of the ticket index.
+   ![Configure Destination](./src/main/resources/images/ConfigureDestination.png)
 
-**Note! The services URLs are used by the next installation steps, so it is good idea to keep the page open.**
+7. In the left-hand navigation menu, choose *Overview* and *Start* the application. Wait for the *Started* status and click on the link under Application URLs to open its homepage. If prompted, log on with your email address and the new password you set for accessing SAP Cloud for Customer.
+
+   Upon start, the application connects to the SAP Cloud for Customer backend and replicates and indexes the last 20 tickets. Opening the homepage shows the services exposed by the application and the status of the ticket index.
+
+   ![Application Overview](./src/main/resources/images/ApplicationOverviewPage.png)
+
+   *Note: The service endpoint URLs are used in the next steps, so it is a good idea to keep the page open.*
 
 ## Configuring Web Service Mashups in SAP Cloud for Customer System
 
