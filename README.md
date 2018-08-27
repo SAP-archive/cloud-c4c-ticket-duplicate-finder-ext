@@ -68,14 +68,14 @@ The main focus is on the following integration points:
 
 ## Installation Steps
 
-* Navigation between SAP Cloud for Customer User Interface Frameworks
-* Import and Build Duplicate Ticket Finder Application in Eclipse IDE 
-* Deploy the Application via the SAP Cloud Platform Cockpit
-* Configure SAP Cloud for Customer OData API access, using a technical user.
-* Configure OData Event Notification in SAP Cloud for Customer for creating tickets.
-* Create and configure Web Service Mashups in SAP Cloud for Customer for your application.
-* Create and configure HTML Mashup Interface in SAP Cloud for Customer for your application.
-* Embed the application interface in SAP Cloud for Customer UI.
+* [Navigation between SAP Cloud for Customer User Interface Frameworks](#navigation-between-sap-cloud-for-customer-user-interface-frameworks)
+* [Import and Build Duplicate Ticket Finder Application in Eclipse IDE](#import-and-build-duplicate-ticket-finder-application-in-eclipse-ide)
+* [Deploy the Application via the SAP Cloud Platform Cockpit](#deploy-the-application-via-the-sap-cloud-platform-cockpit)
+* [Configuring the Application Connectivity to SAP Cloud for Customer OData API](#configuring-the-application-connectivity-to-sap-cloud-for-customer-odata-api)
+* [Create and Configure Web Service Mashups in SAP Cloud for Customer](#create-and-configure-web-service-mashups-in-sap-cloud-for-customer)
+* [Create and Configure an HTML Mashup of Duplicate Ticket Finder in SAP Cloud for Customer](#create-and-configure-an-html-mashup-of-duplicate-ticket-finder-in-sap-cloud-for-customer)
+* [Add the Duplicate Ticket Finder Widget to Your Ticket Processing Screen in SAP Cloud for Customer Fiori Interface](#add-the-duplicate-ticket-finder-widget-to-your-ticket-processing-screen-in-sap-cloud-for-customer-fiori-interface)
+* [Configure OData Event Notifications for Creation of Tickets in SAP Cloud for Customer](#configure-odata-event-notifications-for-creation-of-tickets-in-sap-cloud-for-customer)
 
 ## Navigation between SAP Cloud for Customer User Interface Frameworks
 
@@ -367,31 +367,28 @@ In this section we will enable the Duplicate Ticket Finder Widget in SAP Cloud f
 
 You should now have the application completely configured and working.
 
-## Configure Subscription for Creating the Tickets Event Notifications in SAP Cloud for Customer
+## Configure OData Event Notifications for Creation of Tickets in SAP Cloud for Customer
 
-1. Log on to SAP Cloud for Customer system.
-2. Go to *ADMINISTRATOR > GENERAL SETTINGS* tab and open the *OData Feed Notification* screen.
+This allows automatic indexing of new tickets upon receiving them in the system.
 
-![alt tag](./src/main/resources/images/image2017-2-26%201-49-52.png)
+1. In SAP Cloud for Customer HTML5 interface choose *ADMINISTRATOR > GENERAL SETTINGS* tab and open the *OData Feed Notification to External System* screen.
 
-3. Choose *Add Row* to add a new subscription.
+   ![OData Feed Notification](./src/main/resources/images/ODataEventNotifications.png)
 
-![alt tag](./src/main/resources/images/image2017-2-26%202-16-48.png)
+2. Choose *Add Row* to add a new subscription and follow the instructions:
+    - In the newly created row, enter a name for your subscription, for example *<your application name> Subscription*.
+    - Set the *Consumer Endpoint* to the location of *Notification Service* endpoint provided by your application home page.
+    - As an *Authentication Type* choose *Basic* and enter a random user & password. The application endpoint is not protected. **Don't close this window yet.**
+    - In the Subscriptions section add a row and set up the following subscription:
+       - Business Object Name - SERVICE_REQUEST
+       - OData Service - c4codata
+       - OData Collection - ServiceRequestCollection
+       - Event - C (Creation)
+    - *Save* the subscription configuration
 
-4. In the newly created row, enter a name for your subscription, for example **TicketFinder**.
-5. Enter Consumer Endpoint to the location of Notification Service Endpoint provided by your application.
-6. As an *Authentication Type* you can choose *Basic* and enter a random user & password. The application endpoint is not protected. **Don't close this window yet.**
-7. In the Subscriptions section add a row and set up the following subscription:
+   ![OData Feed Subscription](./src/main/resources/images/ODataEventNotificationSubscription.png)
 
-            Business Object Name:    SERVICE_REQUEST
-            OData Service:           c4codata
-            OData Collection:        ServiceRequestCollection
-            Event:                   C - Creation
-
-![alt tag](./src/main/resources/images/image2017-2-26%202-26-32.png)
-
-8. Save the subscription configuration.
-9. Test the subscription by creating a new Ticket in the *Service > Tickets* page and observe that the number of tickets in the application index increases.
+3. Test the subscription by creating a new Ticket in the *Service > Tickets* page and observe that the number of tickets in the application index increases.
 
 ## Point Of Interest in the Application Code
 
