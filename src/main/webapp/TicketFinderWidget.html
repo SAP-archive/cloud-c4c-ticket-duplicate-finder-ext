@@ -72,7 +72,7 @@
 <script type="text/javascript">
   function getTickets(currentTicketId) {
     sap.byd.ui.mashup.callService({
-      serviceId: 'CW00005',
+      serviceId: 'SearchServiceID',
       parameter: {"{ticketId}": currentTicketId },
       onComplete: 'getTicketsOnCompleteHandler',
       onError: 'getTicketsOnErrorHandler'
@@ -85,7 +85,7 @@
 <script type="text/javascript">
   function mergeTickets(currentId, duplicateId) {
     sap.byd.ui.mashup.callService({
-      serviceId: 'CW00007',
+      serviceId: 'MergeServiceID',
       parameter: {"currentId": currentId,"duplicateId": duplicateId},
       onComplete: 'mergeTicketsOnCompleteHandler',
       onError: 'mergeTicketsOnErrorHandler'

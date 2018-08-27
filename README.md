@@ -58,8 +58,8 @@ The main focus is on the following integration points:
 ## Prerequisites
 
 * SAP Cloud for Customer tenant and user with administrative privileges for performing the required configurations
-* SAP Cloud for Customer service agent user credentials required for asynchronous access to tickets
-* SAP Cloud Platform Extension subaccount for SAP Cloud for Customer extensions. To configure such subaccount follow the SAP Cloud Platform documentation for [Extending SAP Cloud for Customer](https://help.sap.com/viewer/462e41a242984577acc28eae130855ad/Cloud/en-US).  
+* SAP Cloud for Customer service agent user is required for asynchronous access to tickets
+* SAP Cloud Platform Extension Subaccount in Neo environment with resources for hosting Java application. To configure such subaccount follow the SAP Cloud Platform documentation for [Extending SAP Cloud for Customer](https://help.sap.com/viewer/462e41a242984577acc28eae130855ad/Cloud/en-US).  
 * Browser with HTML5 Support 
 * Eclipse IDE for Java EE Developers - Oxygen version
 * Java SE Development Kit (JDK, not JRE), version 8
@@ -68,20 +68,25 @@ The main focus is on the following integration points:
 
 ## Installation Steps
 
-* Import Duplicate Ticket Finder Java application in your Eclipse IDE. 
-* Build and Deploy Duplicate Ticket Finder Java application on SAP Cloud Platform Extension Account.
+* Navigation between SAP Cloud for Customer User Interface Frameworks
+* Import and Build Duplicate Ticket Finder Application in Eclipse IDE 
+* Deploy the Application via the SAP Cloud Platform Cockpit
 * Configure SAP Cloud for Customer OData API access, using a technical user.
 * Configure OData Event Notification in SAP Cloud for Customer for creating tickets.
 * Create and configure Web Service Mashups in SAP Cloud for Customer for your application.
 * Create and configure HTML Mashup Interface in SAP Cloud for Customer for your application.
 * Embed the application interface in SAP Cloud for Customer UI.
 
-## Commonly Used Operations
+## Navigation between SAP Cloud for Customer User Interface Frameworks
 
-- To access SAP Cloud for Customer HTML5 Administrative interface - From Fiori interface choose *Launch HTML5* in the user profile menu.  
-   ![Open HTML5 UI](./src/main/resources/images/OpenHTML5UI.png)
-- To access SAP Cloud for Customer Fiori interface - From HTML5 interface choose *Launch in Fiori Client* in the *Adapt* menu.  
-   ![Open Fiori UI](./src/main/resources/images/OpenFioriUI.png)
+SAP Cloud for Customer has two user interface frameworks:
+
+* Fiori - The default interface for end users. To access the SAP Cloud for Customer Fiori interface from HTML5 interface choose *Launch in Fiori Client* in the *Adapt* menu in the top right corner.
+  ![Open Fiori UI](./src/main/resources/images/OpenFioriUI.png)
+* HTML5 - Contains administration functionalities. To access SAP Cloud for Customer HTML5 interface from Fiori interface choose *Launch HTML5* in the user profile menu in the top right corner.
+  ![Open HTML5 UI](./src/main/resources/images/OpenHTML5UI.png)
+
+The required interface type will be specified where appropriate. 
 
 ## Import and Build Duplicate Ticket Finder Application in Eclipse IDE
 
@@ -118,13 +123,13 @@ The main focus is on the following integration points:
 
 ## Deploy the Application via the SAP Cloud Platform Cockpit
 
-1. In the onboarding page, click on the *SAP Cloud Platform Subaccount* link. The SAP Cloud Platform Cockpit subaccount overview page is loaded.
+1. Open the overview page of your Neo environment *SAP Cloud Platform Extension Subaccount*.
    
-   ![Open subaccount link](./src/main/resources/images/OpenSubaccountLink.png)
+   ![Subaccount Overview](./src/main/resources/images/SubaccountOverview.png)
 
 2. Choose *User information* in the top right corner and note your S/P-user ID.
 
-   ![Open subaccount link](./src/main/resources/images/userInfo.png)
+   ![User Information](./src/main/resources/images/userInfo.png)
 
 3. In the left-hand navigation menu, choose *Applications* > *Java Applications*.
 
@@ -154,16 +159,16 @@ You need to configure the API access to SAP Cloud for Customer for your applicat
 1. For configuring OAuth client in SAP Cloud for Customer you need to know the Service Provider name of your SAP Cloud Platform subaccount.
 
    Open your subaccount and choose *Secirity* > *Trust* from the left menu. Note the value of *Local Provider Name* in *Trust Management* settings for later use.
-   
+
    ![SAP CP Service Provider Name](./src/main/resources/images/CheckSAPCPSPName.png)
 
-2. Logon to SAP Cloud for Customer System and choose *ADMINISTRATOR* > *OAUTH2.0 CLIENT REGISTRATION* and select *New*
+2. Logon to SAP Cloud for Customer HTML5 interface and choose *ADMINISTRATOR* > *OAUTH2.0 CLIENT REGISTRATION* and select *New*
 
    ![OAuth Clients View](./src/main/resources/images/OAuth2C4CView.png)
 
 3. On OAuth 2.0 Client Registration screen configure the client parameters:
 
-    - *Client ID* is automatically generated client identifier. You will need to remember this for SAP Cloud Platform destination configuration.
+    - *Client ID* is automatically generated client identifier. Write this down for SAP Cloud Platform destination configuration.
     - *Client Secret* - Enter your secred. You will need to remember this for SAP Cloud Platform destination configuration.
     - *Description* - Suitable description for your client. Use : "<ApplicationName> Client" (e.g "tdfp0123456789 Client").
     - *Issuer Name* - Select your SAP Cloud Platform Subaccount Service Provider. This is configured as OAuth 2.0 Identity Provider in SAP Cloud for Customer.
@@ -175,7 +180,7 @@ You need to configure the API access to SAP Cloud for Customer for your applicat
 
 4. For configuring OAuth destination in SAP Cloud Platform you need to know the Service Provider name of your SAP Cloud for Customer tenant.
 
-   Logon to SAP Cloud for Customer System and choose *ADMINISTRATOR* > *COMMON TASKS* and select *Configure Single Sign-On*
+   In SAP Cloud for Customer System HTML5 interface choose *ADMINISTRATOR* > *COMMON TASKS* and select *Configure Single Sign-On*
 
    ![C4C SSO Page](./src/main/resources/images/C4CSSOPage.png)
 
