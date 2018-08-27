@@ -76,6 +76,13 @@ The main focus is on the following integration points:
 * Create and configure HTML Mashup Interface in SAP Cloud for Customer for your application.
 * Embed the application interface in SAP Cloud for Customer UI.
 
+## Commonly Used Operations
+
+- To access SAP Cloud for Customer HTML5 Administrative interface - From Fiori interface choose *Launch HTML5* in the user profile menu.  
+   ![Open HTML5 UI](./src/main/resources/images/OpenHTML5UI.png)
+- To access SAP Cloud for Customer Fiori interface - From HTML5 interface choose *Launch in Fiori Client* in the *Adapt* menu.  
+   ![Open Fiori UI](./src/main/resources/images/OpenFioriUI.png)
+
 ## Import and Build Duplicate Ticket Finder Application in Eclipse IDE
 
 1. In the *Eclipse IDE*, click on the *Open Perspective* button in the top right corner and choose Git.
@@ -111,7 +118,7 @@ The main focus is on the following integration points:
 
 ## Deploy the Application via the SAP Cloud Platform Cockpit
 
-1. In the onboarding page, click on the *SAP Cloud Platform Subaccount* link. The SAP Cloud Platform Cockpit is loaded.
+1. In the onboarding page, click on the *SAP Cloud Platform Subaccount* link. The SAP Cloud Platform Cockpit subaccount overview page is loaded.
    
    ![Open subaccount link](./src/main/resources/images/OpenSubaccountLink.png)
 
@@ -120,6 +127,8 @@ The main focus is on the following integration points:
    ![Open subaccount link](./src/main/resources/images/userInfo.png)
 
 3. In the left-hand navigation menu, choose *Applications* > *Java Applications*.
+
+   ![Open subaccount link](./src/main/resources/images/DeployApplications.png)
 
 4. Choose *Deploy Application* and in the dialog box that appears, enter the following values:
 
@@ -136,15 +145,15 @@ The main focus is on the following integration points:
    
    ![Deploy completed](./src/main/resources/images/DeployCompleted.png)
 
-## Configuring the Application Connectivity to SAP Cloud for Customer OData API Using Technical User
+## Configuring the Application Connectivity to SAP Cloud for Customer OData API
 
-The application replicates and indexes the ticket information from the SAP Cloud for Customer system using OData API. During startup it replicates the last 20 tickets in the system and adds them in the index.
+The application replicates and indexes the ticket information from the SAP Cloud for Customer system using OData API. During startup it replicates the last 20 tickets from the system and adds them in the index.
 
-You need to configure the API access to SAP Cloud for Customer system for your application by creating the required OAuth client and SAP Cloud Platform destination. You also need a service user with permissions for accessing the service tickets.
+You need to configure the API access to SAP Cloud for Customer for your application by creating the required OAuth client and SAP Cloud Platform destination. You also need a service user with permissions for accessing the service tickets. You will use the user id of this user for API access.
 
-1. For configuring OAuth client you need to know the Service Provider name of your SAP Cloud Platform subaccount.
+1. For configuring OAuth client in SAP Cloud for Customer you need to know the Service Provider name of your SAP Cloud Platform subaccount.
 
-   Open your subaccount and chose *Secirity* > *Trust* from the left menu. Note the value of *Local Provider Name* in *Trust Management* settings.
+   Open your subaccount and choose *Secirity* > *Trust* from the left menu. Note the value of *Local Provider Name* in *Trust Management* settings for later use.
    
    ![SAP CP Service Provider Name](./src/main/resources/images/CheckSAPCPSPName.png)
 
@@ -206,7 +215,7 @@ You need to configure the API access to SAP Cloud for Customer system for your a
 
 To consume data from an external system in SAP Cloud for Customer, you need to create and configure Web Service Mashups for the requested services.
 
-1. Logon to the SAP Cloud for Customer system and chose *ADMINISTRATOR* > *BUSINESS FLEXIBILITY* > *Masup Web Services* from the top menu.
+1. Logon to the SAP Cloud for Customer HTML5 interface and choose *ADMINISTRATOR* > *BUSINESS FLEXIBILITY* > *Masup Web Services* from the top menu.
 
    ![Open Mashup Web Services](./src/main/resources/images/OpenMashupWebServices.png)
 
@@ -258,61 +267,100 @@ To consume data from an external system in SAP Cloud for Customer, you need to c
       
 ## Create and Configure an HTML Mashup of Duplicate Ticket Finder in SAP Cloud for Customer
 
-The benefit of using HTML Mashups for hosting HTML content instead of URL IFrame is that such content does not hit any third party cookie browser restrictions. 
+The benefit of using HTML Mashups for hosting HTML content instead of URL IFrame is that such content is not affected by third party cookie browser restrictions.
 The downside is that the whole widget interface has to be contained in a single HTML page and the communication with the application back-end needs to happen through Web Service Mashups.
 
 The Duplicate Ticket Finder application provides such HTML mashup widget in the eclipse project, which needs to be configured and installed in SAP Cloud for Customer.
 
-1. In Eclipse IDE open the *cloud-c4c-ticker-duplicate-finder* application project.
-2. Open the *TicketFinderWidget.html* file in *scr/main/webapp* folder.
+1. In the Eclipse IDE, expand the *cloud-c4c-ticket-duplicate-finder* project and open the *TicketFinderWidget.html* file in the *src/main/webapp* folder.
 
-![alt tag](./src/main/resources/images/image2017-2-26%2017-2-27.png)
+   ![Ticket Finder Widget](./src/main/resources/images/TicketFinderWidget.png)
 
-3. Find and replace the following variables in the *TicketFinderWidget.html* file with the corresponding values.
+2. Find and replace the following variables in the *TicketFinderWidget.html* file with the corresponding values:
 
-            <SearchServiceID>	    Search Service mashup service ID of the Web Service mashup
-            <MergeServiceID>	    Merge Service mashup service ID of the Web Service mashup            
+    - SearchServiceID - Search Service mashup *Service ID*
+    - MergeServiceID - Merge Service mashup *Service ID*
 
-4. Save the file *TicketFinderWidget.html* text content in clipboard.
-5. Log on to the SAP Cloud for Customer system and chose *Adapt > Launch in Microsoft SilverLight* from the upper right menu.
-6. From the *Administrator* menu select *MASHUP AUTHORING* to open mashup authoring screen.
+   ![Ticket Finder Widget](./src/main/resources/images/TicketFinderWidgetHTML.png)
 
-![alt tag](./src/main/resources/images/image2017-2-26%2016-29-41.png)
+3. *Save* and *Copy* the *TicketFinderWidget.html* file content in the clipboard.
 
-7. Start creating the new HTML mashup, by clicking on *New > HTML Mashup*.
+4. Log on to the SAP Cloud for Customer system HTML5 interface and choose *ADMINISTRATOR* > *BUSINESS FLEXIBILITY* > *Mashup Authoring* from the top menu.
 
-![alt tag](./src/main/resources/images/image2017-2-26%2016-35-44.png)
+   ![Mashup Authoring](./src/main/resources/images/MashupAuthoring.png)
 
-8. In HTML mashup creation screen fill in the following configuration fields:
+5. Start creating new HTML mashup, by clicking on *New > HTML Mashup*.
 
-            Mashup Category:        Productivity & Tools
-            Port Binding:	      Ticket Information
-            Mashup Name:	      ticket-duplicate-finder
-            Status:	            Active
-            Type:	                  HTML Code
-            HTML Code Editor:	Paste the TicketFinderWidget.html  content you have prepared in the previous steps.
+   ![Create Mashup](./src/main/resources/images/NewHTMLMashup.png)
 
-9. Choose *Save and close*.
+6. In HTML mashup creation screen fill in the following configuration fields:
 
-## Add the Duplicate Ticket Finder Widget to Your Ticket Processing Screen in SAP Cloud for Customer
+    - Mashup Category - Productivity & Tools
+    - Port Binding - Ticket Information
+    - Mashup Name - ticket-finder-<your s/p-user ID> (e.g. ticket-finder-p1234567890)
+    - Type - HTML Code
+    - HTML Code Editor - Paste the TicketFinderWidget.html  content you have prepared in the previous steps.
 
-1. Log on to the SAP Cloud for Customer system and choose *Service > Tickets*.
-2. Select *All Tickets* from the ticket filter and open one of the tickets.
-3. On the top right corner click on *Personalize > This Screen*.
-![alt tag](./src/main/resources/images/ADD_MASHUP_01.png)
-4. Select one of the screen sections and click on *Add Mashup* button, that appear on the popup menu
-![alt tag](./src/main/resources/images/ADD_MASHUP_02.png)
-5. In the *Mashups and Web Services* screen, find your Mashup and set the *Visible* and *Full Width* checkboxes
-![alt tag](./src/main/resources/images/ADD_MASHUP_04.png)
-6. *Apply* the changes
-![alt tag](./src/main/resources/images/ADD_MASHUP_05.png)
-7. Select *End Personalization* to end screen edit mode.
+   Note! HTML Code Editor is located at the bottom of the configuration screen.
+
+   ![Create Mashup](./src/main/resources/images/HTMLMashup1.png)
+
+   ![Create Mashup](./src/main/resources/images/HTMLMashup2.png)
+
+7. Choose *Save*, then *Activate* and *Close* the screen.
+
+   ![Create Mashup](./src/main/resources/images/HTMLMashup3.png)
+
+## Add the Duplicate Ticket Finder Widget to Your Ticket Processing Screen in SAP Cloud for Customer Fiori Interface
+
+In SAP Cloud for Customer systems, the use of custom defined mashups and their placement is defined centrally by editing the screens master layout.
+For the purpose of the exercise we have defined a custom *EXTENSIONS* tab in SAP Cloud for Customer ticket processing screen and *Extension Application* section in this screen.
+Each user can place a personalized extension element there.
+In this section we will enable the Duplicate Ticket Finder Widget in SAP Cloud for Customer Fiori interface.
+
+1. Log on to the SAP Cloud for Customer system Fiori Client and choose choose *Service* > *Tickets*. Change filter to *All Tickets* and open one of the latest reported tickets.
+
+   ![Open Ticket in Fiori Client](./src/main/resources/images/OpenTicketInFioriClient.png)
+
+2. We need to use the HTML5 layout editor for adding the new mashup. Choose *Open layout in HTML5* from the top right user menu.
+
+   ![Open Layout Editor](./src/main/resources/images/OpenLayoutEditor.png)
+
+3. Choose *Personalize* > *Start Personalization* from the top right corner.
+
+   ![Layout Personalization](./src/main/resources/images/LayoutPersonalization.png)
+
+4. Mashup can be placed on any place where the *Plus (+)* sign allows adding personalized elements, however we need a bit more screen space for our user interface. Navigate to *EXTENSIONS* tab.
+
+   ![Layout Personalization](./src/main/resources/images/NavigateToExtensionsTab.png)
+
+5. Hover over *Extension Application* section and select the *Up Arrow* icon in the popup menu. In the second popup menu select *Plus (+)* icon and choose *Add Mashup*.
+
+   ![Select Extension Section](./src/main/resources/images/SelectExtensionSection.png)
+
+   ![Select Mashup Add](./src/main/resources/images/AddMashupMenu.png)
+
+6. Set *Show* filter to *HTML Mashups*. Find your mashup in the list. Enable the *Visible* check box and set *Full Width* flag. Choose *Apply* to confirm the changes.
+
+   ![Add Mashup](./src/main/resources/images/AddTicketFinderMashup.png)
+
+7. Your Ticket Duplicate Finder user interface will show up in *Extension Application* section.
+
+   ![Add Mashup Result](./src/main/resources/images/MashupAddResult.png)
+
+8. Select *End Personalization* to confirm your changes and close the HTML5 interface.
+
+   ![End Personalization](./src/main/resources/images/EndPersonalization.png)
+
+9. Log on to the SAP Cloud for Customer system Fiori Client and choose choose *Service* > *Tickets*. Change filter to *All Tickets* and open one of the latest reported tickets.
+
+   In the *EXTENSIONS* tab you should see your *Ticket Duplicate Finder* application interface in working condition.
+
+   ![End Personalization](./src/main/resources/images/TicketFinderInFiori.png)
 
 **Result**
 
-You should now have the application configured and working.
-
-![alt tag](./src/main/resources/images/ADD_MASHUP_06.png)
+You should now have the application completely configured and working.
 
 ## Configure Subscription for Creating the Tickets Event Notifications in SAP Cloud for Customer
 
