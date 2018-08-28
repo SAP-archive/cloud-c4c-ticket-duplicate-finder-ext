@@ -2,30 +2,29 @@
 
 ## Introduction
 
-SAP Cloud for Customer allows your company sales and support teams to engage with customers across multiple channels. You can use SAP Cloud Platform to develop, deploy and host SAP Cloud for Customer extension applications that simplify and differentiate your business processes. 
+SAP Cloud for Customer allows your company sales and support teams to engage with customers across multiple channels. You can use SAP Cloud Platform to develop, deploy and host SAP Cloud for Customer extension applications that simplify and differentiate your business processes.
 
-The sample extension application for SAP Hybris Cloud for Customer that we’ll be working with today - *SAP Duplicate Ticket Finder* - helps support employees in finding duplicate tickets reported for the same customer issues.
+The sample extension application for SAP Cloud for Customer that we’ll be working with today - *SAP Duplicate Ticket Finder* - helps support employees in finding duplicate tickets reported for the same customer issues.
 
 ## Extension Applications Overview
 
-SAP duplicate ticket finder is a simple Java-based extension application, that demonstrates the integration capabilities, between SAP Cloud for Customer and SAP Cloud Platform.
+*SAP Duplicate Ticket Finder* is a simple Java-based extension application, that demonstrates the integration capabilities, between SAP Cloud for Customer and SAP Cloud Platform.
 
 Implementing extension application hosted on the SAP Cloud Platform allows developers to take full advantage of the platform capabilities and implement fully-fledged business processes. With the broad set of platform services at your disposal, your extension applications can expand into many scenarios that are impossible or impractical to achieve with an in-app extensibility.
 
 ![alt tag](./src/main/resources/images/ApplicationTypes.png)
 
 Extension applications have the following characteristics:
-* implement business logic and/or data processing in Java Web container hosted on the platform
-* consume SAP Cloud for Customer data using OData or SOAP APIs
-* provide back-end services for UI or SAP Cloud for Customer consumption
-* can host secure and rich user interface, that can be either embedded or standalone
-
+* Implement business logic and/or data processing in Java Web container hosted on the platform
+* Consume SAP Cloud for Customer data using OData or SOAP APIs
+* Provide back-end services for UI or SAP Cloud for Customer consumption
+* Can host secure and rich user interface, that can be either embedded or standalone
 
 ## Application Scenario
 
 Ticket processing is done by Service Agents in SAP Cloud for Customer. For most businesses, improving the customer service quality is a main component for success, driving loyalty and customer satisfaction. Main component for this is improving the efficiency of the Service Agents. A key enabler for achieving this is improving the efficiency of the Service Agents. Finding a solution to customer problems fast, reducing duplicate work for service request investigation and reacting on most common customer challenges adequately is an area for innovation that can be explored by extension application developers.
 
-Duplicate ticket finder sample application is focusing on this business case, by offering simple integrated solution to find and classify tickets reported or related to the same customer problem. The ultimate goal of the application is to demonstrate the technical integration points between SAP Cloud for Customer and SAP Cloud Platform Extension Applications in the context of a realistic business scenario. It can be used as a template for gaining knowledge on how to implement extension applications for SAP Cloud for Customer using SAP Cloud Platform. 
+Duplicate ticket finder sample application is focusing on this business case, by offering simple integrated solution to find and classify tickets reported or related to the same customer problem. The ultimate goal of the application is to demonstrate the technical integration points between SAP Cloud for Customer and SAP Cloud Platform Extension Applications in the context of a realistic business scenario. It can be used as a template for gaining knowledge on how to implement extension applications for SAP Cloud for Customer using SAP Cloud Platform.
 
 The application use-case is:
 
@@ -81,10 +80,12 @@ The main focus is on the following integration points:
 
 SAP Cloud for Customer has two user interface frameworks:
 
-* Fiori - The default interface for end users. To access the SAP Cloud for Customer Fiori interface from HTML5 interface choose *Launch in Fiori Client* in the *Adapt* menu in the top right corner.
-  ![Open Fiori UI](./src/main/resources/images/OpenFioriUI.png)
-* HTML5 - Contains administration functionalities. To access SAP Cloud for Customer HTML5 interface from Fiori interface choose *Launch HTML5* in the user profile menu in the top right corner.
+* Fiori - The default interface for end users. When you are using the *Fiori* interface, you can easily jump into the *HTML5* interface by choosing *Launch HTML5* in the user profile menu (top right corner)
+
   ![Open HTML5 UI](./src/main/resources/images/OpenHTML5UI.png)
+* HTML5 - Contains administration functionalities. When you are using the *HTML5* interface, you can easily jump into the SAP Cloud for Customer *Fiori* interface by choosing *Launch in Fiori Client* in the *Adapt* menu (top right corner)
+
+  ![Open Fiori UI](./src/main/resources/images/OpenFioriUI.png)
 
 The required interface type will be specified where appropriate. 
 
@@ -123,8 +124,8 @@ The required interface type will be specified where appropriate.
 
 ## Deploy the Application via the SAP Cloud Platform Cockpit
 
-1. Open the overview page of your Neo environment *SAP Cloud Platform Extension Subaccount*.
-   
+1. Open the overview page of your Neo environment *SAP Cloud Platform Extension Subaccount*. The link is available to you via the on-boarding application.
+
    ![Subaccount Overview](./src/main/resources/images/SubaccountOverview.png)
 
 2. Choose *User information* in the top right corner and note your S/P-user ID.
@@ -168,10 +169,10 @@ You need to configure the API access to SAP Cloud for Customer for your applicat
 
 3. On OAuth 2.0 Client Registration screen configure the client parameters:
 
-    - *Client ID* is automatically generated client identifier. Write this down for SAP Cloud Platform destination configuration.
-    - *Client Secret* - Enter your secred. You will need to remember this for SAP Cloud Platform destination configuration.
-    - *Description* - Suitable description for your client. Use : "<ApplicationName> Client" (e.g "tdfp0123456789 Client").
-    - *Issuer Name* - Select your SAP Cloud Platform Subaccount Service Provider. This is configured as OAuth 2.0 Identity Provider in SAP Cloud for Customer.
+    - *Client ID* is automatically generated client identifier. Write this down for SAP Cloud Platform destination configuration
+    - *Client Secret* - Invent and enter a secret. You will need to remember this secret for creating the SAP Cloud Platform destination configuration later
+    - *Description* - Suitable description for your client. Use : "<ApplicationName> Client" (e.g "tdfp0123456789 Client")
+    - *Issuer Name* - Select your SAP Cloud Platform Subaccount Service Provider. This is configured as OAuth 2.0 Identity Provider in SAP Cloud for Customer
     - *Scope* - Under scope select *UIWC:CC_HOME*
 
    Choose *Save and Close* after the configuration is complete.
@@ -188,7 +189,7 @@ You need to configure the API access to SAP Cloud for Customer for your applicat
 
    ![C4C SSO Page](./src/main/resources/images/C4CServiceProvider.png)
 
-5. Open subaccount overvew in SAP Cloud Platform Cockpit. In the left-hand navigation menu, choose *Applications* > *Java Applications*, then choose your application in the list of Java applications.
+5. Open subaccount overview in SAP Cloud Platform Cockpit. In the left-hand navigation menu, choose *Applications* > *Java Applications*, then choose your application in the list of Java applications. In the next step you will configure a destination on application level.
 
    ![Open Java Application](./src/main/resources/images/SelectJavaApplication.png)
 
@@ -231,10 +232,10 @@ To consume data from an external system in SAP Cloud for Customer, you need to c
 3. In the New Mashup configuration set up the *Search Service* consumption.
 
     - Service Name - search-ticket-duplicate-finder
-    - Authentication Method - None
+    - Authorization Method  - None
     - Service Protocol - JSON
     - HTTP Method - GET
-    - URL - Search Service URL from your application homepage
+    - URL - Service Endpoint URL for the Search Service – You can find it in your application homepage
 
    Click on *Extract Parameters* to configure the service input parameters and *Save* the mashup.
 
@@ -304,7 +305,7 @@ The Duplicate Ticket Finder application provides such HTML mashup widget in the 
     - Port Binding - Ticket Information
     - Mashup Name - ticket-finder-<your s/p-user ID> (e.g. ticket-finder-p1234567890)
     - Type - HTML Code
-    - HTML Code Editor - Paste the TicketFinderWidget.html  content you have prepared in the previous steps.
+    - HTML Code Editor - Paste the TicketFinderWidget.html  content you have prepared in the previous steps
 
    Note! HTML Code Editor is located at the bottom of the configuration screen.
 
@@ -383,7 +384,7 @@ This allows automatic indexing of new tickets upon receiving them in the system.
        - Business Object Name - SERVICE_REQUEST
        - OData Service - c4codata
        - OData Collection - ServiceRequestCollection
-       - Event - C (Creation)
+       - Event - C (Creation)(Choose “Create”)
     - *Save* the subscription configuration
 
    ![OData Feed Subscription](./src/main/resources/images/ODataEventNotificationSubscription.png)
@@ -411,7 +412,7 @@ If you want to dig into the application source code, for convenience we collecte
 ### Copyright and License
 
 ```
-Copyright 2017 [SAP SE](http://www.sap.com/)
+Copyright 2018 [SAP SE](http://www.sap.com/)
 
 Licensed under the Apache License, Version 2.0 (the "License"); 
 you may not use this work except in compliance with the License. 
