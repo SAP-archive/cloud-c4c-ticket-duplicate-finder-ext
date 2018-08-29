@@ -16,7 +16,7 @@ Implementing extension application hosted on the SAP Cloud Platform allows devel
 
 Extension applications have the following characteristics:
 * Implement business logic and/or data processing in Java Web container hosted on the platform
-* Consume SAP Cloud for Customer data using OData or SOAP APIs
+* Consume SAP Cloud for Customer data using OData APIs
 * Provide back-end services for UI or SAP Cloud for Customer consumption
 * Can host secure and rich user interface, that can be either embedded or standalone
 
@@ -38,7 +38,7 @@ The application use-case is:
 
 Service requests filled by people are usually a mixture of both structured and unstructured information. Finding semantic similarities between two tickets is non-trivial task, that might employ many technology tools - ticket metadata analysis, text heuiristic analysis and even machine learning.
 
-SAP Duplicate Ticket Finder implements very simple algorithm which uses the ticket description as indicator for similarities. It uses OData APIs to extract the tickets from the Cloud for Customer system and builds [Lucene](https://lucene.apache.org/core/) in-memory index. When new ticket is created it gets added to the index. When two tickets are catergorized by users as duplicate they get merged in the index, so they appear in the same group. All data is kept in memory, so the index gets lost after application restart.
+SAP Duplicate Ticket Finder implements very simple algorithm which uses the ticket description as indicator for similarities. It uses [SAP Cloud for Customer OData APIs](https://help.sap.com/viewer/1364b70b9cbb417ea5e2d80e966d4f49/1808/en-US/6c0a463cc9ca450cbd01a9a5057ce682.html) to extract the tickets from the Cloud for Customer system and builds [Lucene](https://lucene.apache.org/core/) in-memory index. When new ticket is created it gets added to the index. When two tickets are catergorized by users as duplicate they get merged in the index, so they appear in the same group. All data is kept in memory, so the index gets lost after application restart.
 
 The UI is implemented as native HTML mashup in SAP Cloud for Customer. In order to connect to the Java backend logic, it uses 2 Web Service mashups, which obtain the groups of similar tickets to the current ticket and allow  the user to add the current ticket to existing group of duplicates.
 
