@@ -197,7 +197,7 @@ You need to configure the API access to SAP Cloud for Customer for your applicat
 
    Choose the *sap_cloud4customer_odata.txt* template file in the <Project Folder>/src/main/resources folder and configure the following values:
 
-    - *URL* - SAP Hybris Cloud for Customer API URL. Replace *"<C4C Host>"* with your SAP Cloud for Customer API host name. Check the onboarding page for API URL reference
+    - *URL* - SAP Hybris Cloud for Customer API URL. Replace *"<C4C Host>"* with your SAP Cloud for Customer API host name. Check the onboarding page for API Host reference.
     - *Audience* - SAP Cloud for Customer Service Provider name. (Use exact copy of the url do not change any letters e.g. *HTTPS://my328096-sso.crm.ondemand.com*
     - *Client Key* - OAuth Client ID you created for your application
     - *Token Service URL* - SAP Hybris Cloud for Customer Token Service URL. Replace *"<C4C Host>"* with your SAP Cloud for Customer API host name
