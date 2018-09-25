@@ -377,7 +377,7 @@ This allows automatic indexing of new tickets upon receiving them in the system.
    ![OData Feed Notification](./src/main/resources/images/ODataEventNotifications.png)
 
 2. Choose *Add Row* to add a new subscription and follow the instructions:
-    - In the newly created row, enter a name for your subscription, for example *<your application name> Subscription*.
+    - In the newly created row, enter a name for your subscription, for example *tdpf1234567890 Subscription*.
     - Set the *Consumer Endpoint* to the location of *Notification Service* endpoint provided by your application home page.
     - As an *Authentication Type* choose *Basic* and enter a random user & password. The application endpoint is not protected. **Don't close this window yet.**
     - In the Subscriptions section add a row and set up the following subscription:
