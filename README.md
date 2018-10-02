@@ -124,7 +124,7 @@ The required interface type will be specified where appropriate.
 
 ## Deploy the Application via the SAP Cloud Platform Cockpit
 
-1. Open the overview page of your Neo environment *SAP Cloud Platform Extension Subaccount*. The link is available to you via the on-boarding application.
+1. Open the overview page of your Neo environment *SAP Cloud Platform Extension Subaccount*. The link is available to you via the on-boarding application : https://cna378homeb4a8afac3.us1.hana.ondemand.com.
 
    ![Subaccount Overview](./src/main/resources/images/SubaccountOverview.png)
 
