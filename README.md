@@ -397,7 +397,6 @@ If you want to dig into the application source code, for convenience we collecte
 
 | Class             |          Method | Description  |
 |-|-|-|
-|InitializeListener|contextInitialized|On application start loads initial set of tickets in the index.|
 |C4CTicketService|retrieveLastCreatedC4CTickets|Retrieves a set of latest tickets for SAP Cloud for Customer system.|
 ||retrieveC4CTicketByID|Retrieves specific ticket from SAP Cloud for Customer system.|
 |TicketResource|search|REST Service for finding similar tickets to the passed ticket.|
