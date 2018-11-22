@@ -42,9 +42,9 @@ public class TicketResource {
 	private static final String ERROR_TICKET_NOT_FOUNT = "Ticket with id={0} not found";
 	private static final String ERROR_INTERNAL = "Internal server error.";
 	private static final String EMPTY_STRING = "";
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(TicketResource.class);
+	private static final int NUMBER_OF_TICKETS = 20;
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(TicketResource.class);
 
 	@GET
 	@Path("all")
@@ -56,9 +56,10 @@ public class TicketResource {
 
 	@PUT
 	@Path("fetch")
-	public Response triggerFetchTickets() {
-		TicketLoader.loadTickets();
-		return Response.status(Status.ACCEPTED).build();
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response triggerFetchTickets() throws Exception {
+		Collection<Ticket> tickets = TicketLoader.getTickets(NUMBER_OF_TICKETS);
+		return Response.status(Status.OK).entity(tickets).build();
 	}
 
 	@POST
