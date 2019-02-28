@@ -155,6 +155,8 @@ You need to create in your SAP Cloud for Customer system a Business User with AP
 
 The application build process creates MTA solution archive *(cloud-c4c-ticket-duplicate-finder.mtar)* along with regular *ROOT.WAR* archive. The MTA archive contains the required application deployment configurations along with the application binaries. The required MTA deployment configuration (*mtad.yaml*) can be found in project *resources* folder.
 
+Information on *mtad.yaml* structure and contents can be found in [SAP CP Documentation](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/f1caa871360c40e7be7ce4264ab9c336.html).
+
 1. Open the overview page of your Neo environment *SAP Cloud Platform Extension Subaccount*.  In the left-hand navigation menu, choose *Solutions* and click on *Deploy Button* to open solution deployment dialog.
 
    ![Open Solution Deployment](./src/main/resources/images/SolutionDeploySelect.png)
@@ -186,7 +188,7 @@ The application build process creates MTA solution archive *(cloud-c4c-ticket-du
    ![Application Overview](./src/main/resources/images/ApplicationOverviewPage.png)
 
    *Note: The service endpoint URLs are used in the next steps, so it is a good idea to keep the page open.*
-   *Note: You can skip the manual application deployment and connectivity configuration, when using MTA deployment*
+   *Note: You can skip the manual application deployment and connectivity configuration, when using MTA deployment.*
 
 ## Manual Application Deployment via the SAP Cloud Platform Cockpit (Optional)
 

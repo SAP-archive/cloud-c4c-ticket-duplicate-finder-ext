@@ -35,105 +35,104 @@ import com.sap.cloud.c4c.ticket.duplicate.finder.index.TicketGroup;
 
 @Path("ticket")
 public class TicketResource {
-	
-	private static final String ERROR_MERGE_TICKETS = "Merging tickets failed.";
-	private static final String ERROR_MISSING_PARAMS = "Missing required form params.";
-	private static final String SUCCESSFUL_MERGE_MSG = "Tickets are merged successfully.";
-	private static final String ERROR_TICKET_NOT_FOUNT = "Ticket with id={0} not found";
-	private static final String ERROR_INTERNAL = "Internal server error.";
-	private static final String EMPTY_STRING = "";
-	private static final int NUMBER_OF_TICKETS = 20;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(TicketResource.class);
+    private static final String ERROR_MERGE_TICKETS = "Merging tickets failed.";
+    private static final String ERROR_MISSING_PARAMS = "Missing required form params.";
+    private static final String SUCCESSFUL_MERGE_MSG = "Tickets are merged successfully.";
+    private static final String ERROR_TICKET_NOT_FOUNT = "Ticket with id={0} not found";
+    private static final String ERROR_INTERNAL = "Internal server error.";
+    private static final String EMPTY_STRING = "";
+    private static final int NUMBER_OF_TICKETS = 20;
 
-	@GET
-	@Path("all")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAll() {
-		Collection<Ticket> tickets = TicketStorage.findAll();
-		return Response.status(Status.OK).entity(tickets).build();
-	}
+    private static final Logger LOGGER = LoggerFactory.getLogger(TicketResource.class);
 
-	@PUT
-	@Path("fetch")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response triggerFetchTickets() throws Exception {
-	    try {
-		  TicketLoader.loadTickets();
-	    } catch (Exception e) {
-	        LOGGER.error("Getting tickets failed",e);
+    @GET
+    @Path("all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAll() {
+        Collection<Ticket> tickets = TicketStorage.findAll();
+        return Response.status(Status.OK).entity(tickets).build();
+    }
+
+    @PUT
+    @Path("fetch")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response triggerFetchTickets() throws Exception {
+        Collection<Ticket> tickets = TicketLoader.getTickets(NUMBER_OF_TICKETS);
+        return Response.status(Status.OK).entity(tickets).build();
+    }
+
+    @POST
+    @Path("merge")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response merge(@FormParam("currentId") String currentId, @FormParam("duplicateId") String duplicateId) {
+        Status status = null;
+        try {
+            IndexService.merge(currentId, duplicateId);
+            status = Status.OK;
+        } catch (IndexException e) {
+            status = Status.INTERNAL_SERVER_ERROR;
+        } catch (IllegalArgumentException e) {
+            status = Status.BAD_REQUEST;
         }
-		return Response.status(Status.OK).entity(tickets).build();
-	}
+        return Response.status(status).entity(getMergeInfoMessageByResponseStatus(status)).build();
+    }
 
-	@POST
-	@Path("merge")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response merge(@FormParam("currentId") String currentId, @FormParam("duplicateId") String duplicateId) {
-		Status status = null;
-		try {
-			IndexService.merge(currentId, duplicateId);
-			status = Status.OK;
-		} catch (IndexException e) {
-			status = Status.INTERNAL_SERVER_ERROR;
-		} catch (IllegalArgumentException e) {
-			status = Status.BAD_REQUEST;
-		}
-		return Response.status(status).entity(getMergeInfoMessageByResponseStatus(status)).build();
-	}
+    @GET
+    @Path("search/{ticket_id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response search(@PathParam("ticket_id") String ticketId) {
+        Response response = null;
+        try {
+            Ticket ticket = TicketStorage.findById(ticketId);
+            if (ticket == null) {
+                ticket = loadTicket(ticketId);
+            }
 
-	@GET
-	@Path("search/{ticket_id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response search(@PathParam("ticket_id") String ticketId) {
-		Response response = null;
-		try {
-			Ticket ticket = TicketStorage.findById(ticketId);
-			if (ticket == null) {
-				ticket = loadTicket(ticketId);
-			}
+            List<Group> groups = IndexService.search(ticket).stream()
+                    .map(TicketGroup::getTickets)
+                    .map(ids -> ids.stream().map(TicketStorage::findById).collect(Collectors.toList()))
+                    .map(tickets -> new Group(tickets))
+                    .collect(Collectors.toList());
 
-			List<Group> groups = IndexService.search(ticket).stream()
-					.map(TicketGroup::getTickets)
-					.map(ids -> ids.stream().map(TicketStorage::findById).collect(Collectors.toList()))
-					.map(tickets -> new Group(tickets))
-					.collect(Collectors.toList());
-			
-			response = Response.status(Response.Status.OK).entity(groups).build();
-		} catch (C4CTicketNotFoundException | IOException | InvalidResponseException | IndexException e) {
-			response = Response.status(Status.NOT_FOUND).entity(new InfoMessage(Status.NOT_FOUND, MessageFormat.format(ERROR_TICKET_NOT_FOUNT, ticketId))).build();
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			response = Response.status(Status.INTERNAL_SERVER_ERROR).entity(new InfoMessage(Status.INTERNAL_SERVER_ERROR, ERROR_INTERNAL)).build();
-		}
-		return response;
-	}
-	
-	private InfoMessage getMergeInfoMessageByResponseStatus(Status status) {
-		String message = EMPTY_STRING;
-		switch (status) {
-			case BAD_REQUEST:
-				message = ERROR_MISSING_PARAMS;
-				break;
-			case INTERNAL_SERVER_ERROR:
-				message = ERROR_MERGE_TICKETS;
-				break;
-			case OK:
-				message = SUCCESSFUL_MERGE_MSG;
-				break;
-			default:
-		}
-		return new InfoMessage(status, message);
-	}
+            response = Response.status(Response.Status.OK).entity(groups).build();
+        } catch (C4CTicketNotFoundException | IOException | InvalidResponseException | IndexException e) {
+            response = Response.status(Status.NOT_FOUND)
+                    .entity(new InfoMessage(Status.NOT_FOUND, MessageFormat.format(ERROR_TICKET_NOT_FOUNT, ticketId)))
+                    .build();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            response = Response.status(Status.INTERNAL_SERVER_ERROR)
+                    .entity(new InfoMessage(Status.INTERNAL_SERVER_ERROR, ERROR_INTERNAL)).build();
+        }
+        return response;
+    }
 
-	private Ticket loadTicket(String ticketId)
-			throws IOException, InvalidResponseException, IndexException, C4CTicketNotFoundException {
-		C4CTicket c4cTicket = C4CTicketService.retrieveC4CTicketByID(ticketId);
-		Ticket ticket = Ticket.convertC4CTicket(c4cTicket);
-		TicketStorage.save(ticket);
-		IndexService.add(ticket);
-		return ticket;
-	}
+    private InfoMessage getMergeInfoMessageByResponseStatus(Status status) {
+        String message = EMPTY_STRING;
+        switch (status) {
+        case BAD_REQUEST:
+            message = ERROR_MISSING_PARAMS;
+            break;
+        case INTERNAL_SERVER_ERROR:
+            message = ERROR_MERGE_TICKETS;
+            break;
+        case OK:
+            message = SUCCESSFUL_MERGE_MSG;
+            break;
+        default:
+        }
+        return new InfoMessage(status, message);
+    }
+
+    private Ticket loadTicket(String ticketId)
+            throws IOException, InvalidResponseException, IndexException, C4CTicketNotFoundException {
+        C4CTicket c4cTicket = C4CTicketService.retrieveC4CTicketByID(ticketId);
+        Ticket ticket = Ticket.convertC4CTicket(c4cTicket);
+        TicketStorage.save(ticket);
+        IndexService.add(ticket);
+        return ticket;
+    }
 }
