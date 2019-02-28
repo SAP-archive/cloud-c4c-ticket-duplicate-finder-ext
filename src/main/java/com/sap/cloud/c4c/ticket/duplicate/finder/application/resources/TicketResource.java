@@ -58,7 +58,11 @@ public class TicketResource {
 	@Path("fetch")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response triggerFetchTickets() throws Exception {
-		Collection<Ticket> tickets = TicketLoader.getTickets(NUMBER_OF_TICKETS);
+	    try {
+		  TicketLoader.loadTickets();
+	    } catch (Exception e) {
+	        LOGGER.error("Getting tickets failed",e);
+        }
 		return Response.status(Status.OK).entity(tickets).build();
 	}
 

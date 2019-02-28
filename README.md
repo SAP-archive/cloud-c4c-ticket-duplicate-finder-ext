@@ -4,7 +4,7 @@
 
 SAP Cloud for Customer allows your company sales and support teams to engage with customers across multiple channels. You can use SAP Cloud Platform to develop, deploy and host SAP Cloud for Customer extension applications that simplify and differentiate your business processes.
 
-The sample extension application for SAP Cloud for Customer that we’ll be working with today - *SAP Duplicate Ticket Finder* - helps support employees in finding duplicate tickets reported for the same customer issues.
+The sample extension application for SAP Cloud for Customer that we will be showing - *SAP Duplicate Ticket Finder* - helps support employees in finding duplicate tickets reported for the same customer issues.
 
 ## Extension Applications Overview
 
@@ -54,6 +54,23 @@ The main focus is on the following integration points:
 * Developing and Configuring Extension Application UIs in SAP Cloud for Customer - in order to show Ticket Duplicate Finder interface in ticket processing screen
 * Receiving event notifications upon business object changes in SAP Cloud for Customer - in order to implement real time ticket replication and analysis
 
+## Application packaging and deployment
+
+Complex business applications are composed of multiple parts. Thus, development, deployment, and configuration of separate elements introduce a variety of lifecycle and orchestration challenges. To address these challenges, SAP introduces the Multi-Target Application (MTA) concept. It addresses the complexity of continuous deployment by employing a formal target-independent application model.
+
+An MTA comprises of multiple modules created with different technologies, deployed to different target runtimes, but having a common lifecycle. Initially, developers describe the modules of the application, the interdependencies to other modules and services, and required and exposed interfaces. Afterward, the SAP Cloud Platform validates, orchestrates, and automates the deployment of the MTA.
+
+The MTA concept is applicable for applications in the Neo and Cloud Foundry environments with specific distinctions for each.
+*SAP Duplicate Ticket Finder* build produces Neo MTA archive, so it can be deployed using MTA Deployment on SAP Cloud Platform and greatly reduces deployment complexity.
+
+![alt tag](./src/main/resources/images/MTA_Deploy.png)
+
+For more details regarding MTA Concept:
+
+- [SAP Cloud Platform Multi-Target Applications](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/c4f0d850b6ba46089a76d53ab805c9e6.html)
+- [SAP Cloud Platform Multi-Target Applications for the Neo Environment](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/e1bb7eb746d34237b8b47035adff5022.html)
+
+
 ## Prerequisites
 
 * SAP Cloud for Customer tenant and user with administrative privileges for performing the required configurations
@@ -67,14 +84,18 @@ The main focus is on the following integration points:
 
 ## Installation Steps
 
-* [Navigation between SAP Cloud for Customer User Interface Frameworks](#navigation-between-sap-cloud-for-customer-user-interface-frameworks)
-* [Import and Build Duplicate Ticket Finder Application in Eclipse IDE](#import-and-build-duplicate-ticket-finder-application-in-eclipse-ide)
-* [Deploy the Application via the SAP Cloud Platform Cockpit](#deploy-the-application-via-the-sap-cloud-platform-cockpit)
-* [Configuring the Application Connectivity to SAP Cloud for Customer OData API](#configuring-the-application-connectivity-to-sap-cloud-for-customer-odata-api)
-* [Create and Configure Web Service Mashups in SAP Cloud for Customer](#create-and-configure-web-service-mashups-in-sap-cloud-for-customer)
-* [Create and Configure an HTML Mashup of Duplicate Ticket Finder in SAP Cloud for Customer](#create-and-configure-an-html-mashup-of-duplicate-ticket-finder-in-sap-cloud-for-customer)
-* [Add the Duplicate Ticket Finder Widget to Your Ticket Processing Screen in SAP Cloud for Customer Fiori Interface](#add-the-duplicate-ticket-finder-widget-to-your-ticket-processing-screen-in-sap-cloud-for-customer-fiori-interface)
-* [Configure OData Event Notifications for Creation of Tickets in SAP Cloud for Customer](#configure-odata-event-notifications-for-creation-of-tickets-in-sap-cloud-for-customer)
+- [Navigation between SAP Cloud for Customer User Interface Frameworks](#navigation-between-sap-cloud-for-customer-user-interface-frameworks)
+- [Configuring Service User for API Access in SAP Cloud for Customer](#configuring-service-user-for-api-access-in-sap-cloud-for-customer)
+- [Import and Build Duplicate Ticket Finder Application in Eclipse IDE](#import-and-build-duplicate-ticket-finder-application-in-eclipse-ide)
+- [Deploy the Application via MTA Solution Deployer in SAP Cloud Platform Cloud Cockpit](#deploy-the-application-via-mta-solution-deployer-in-sap-cloud-platform-cloud-cockpit)
+- [Manual Application Deployment via the SAP Cloud Platform Cockpit (Optional)](#manual-application-deployment-via-the-sap-cloud-platform-cockpit--optional-)
+- [Manual Configuration of the Application Connectivity to SAP Cloud for Customer OData API (Optional)](#manual-configuration-of-the-application-connectivity-to-sap-cloud-for-customer-odata-api--optional-)
+- [Create and Configure Web Service Mashups in SAP Cloud for Customer](#create-and-configure-web-service-mashups-in-sap-cloud-for-customer)
+- [Create and Configure an HTML Mashup of Duplicate Ticket Finder in SAP Cloud for Customer](#create-and-configure-an-html-mashup-of-duplicate-ticket-finder-in-sap-cloud-for-customer)
+- [Add the Duplicate Ticket Finder Widget to Your Ticket Processing Screen in SAP Cloud for Customer Fiori Interface](#add-the-duplicate-ticket-finder-widget-to-your-ticket-processing-screen-in-sap-cloud-for-customer-fiori-interface)
+- [Configure OData Event Notifications for Creation of Tickets in SAP Cloud for Customer](#configure-odata-event-notifications-for-creation-of-tickets-in-sap-cloud-for-customer)
+- [Point Of Interest in the Application Code](#point-of-interest-in-the-application-code)
+  * [Copyright and License](#copyright-and-license)
 
 ## Navigation between SAP Cloud for Customer User Interface Frameworks
 
@@ -87,7 +108,17 @@ SAP Cloud for Customer has two user interface frameworks:
 
   ![Open Fiori UI](./src/main/resources/images/OpenFioriUI.png)
 
-The required interface type will be specified where appropriate. 
+The required interface type will be specified where appropriate.
+
+## Configuring Service User for API Access in SAP Cloud for Customer
+
+You need to create in your SAP Cloud for Customer system a Business User with API Access and corresponding authorizations for OData API Access and Ticket processing work center.
+1. To set user access rights open *Administrator > General Settings > Business Users*. Select the user and open *Edit > Access Rights*. Ensure the following work centers are configured for the user:
+
+   SEOD_TICKETMD_SADL_WCVIEW | Service | Tickets
+2. To set user authentication under *Administrator > General Settings > Business Users*. Select the user and open *Edit > Attributes*. From there select *Security Policy: S_BUSINESS_USER_WITHOUT_PASSWORD - Default Password Policy for Business Users with Single Sign-On*
+
+3. Remember the user id in order to provide it during application installation (e.g. SERVICEUSER01)
 
 ## Import and Build Duplicate Ticket Finder Application in Eclipse IDE
 
@@ -100,9 +131,8 @@ The required interface type will be specified where appropriate.
 3. Enter https://github.com/SAP/cloud-c4c-ticket-duplicate-finder-ext.git in the URI field and choose *Next*.
 
    ![Clone Git Repository URL](./src/main/resources/images/CloneGitRepoURL.png)
-4. Select the *teched_2018* branch and choose *Next*.
+4. Select the *master* branch and choose *Next*.
 
-   ![Select branch](./src/main/resources/images/GitBranchSelect.png)
 5. Set the *Directory* field and choose *Finish*. Take a note of that directory, we will refer to it as *Project Folder* later in the exercises.
 
    ![Set project directory](./src/main/resources/images/GitProjectFolderSelect.png)
@@ -121,25 +151,59 @@ The required interface type will be specified where appropriate.
 
    ![Build Maven Project](./src/main/resources/images/MavenBuild.png)
    
+## Deploy the Application via MTA Solution Deployer in SAP Cloud Platform Cloud Cockpit
 
-## Deploy the Application via the SAP Cloud Platform Cockpit
+The application build process creates MTA solution archive *(cloud-c4c-ticket-duplicate-finder.mtar)* along with regular *ROOT.WAR* archive. The MTA archive contains the required application deployment configurations along with the application binaries. The required MTA deployment configuration (*mtad.yaml*) can be found in project *resources* folder.
 
-1. Open the overview page of your Neo environment *SAP Cloud Platform Extension Subaccount*. The link is available to you via the on-boarding application : https://cna378homea52a3ee58.hana.ondemand.com .
+1. Open the overview page of your Neo environment *SAP Cloud Platform Extension Subaccount*.  In the left-hand navigation menu, choose *Solutions* and click on *Deploy Button* to open solution deployment dialog.
+
+   ![Open Solution Deployment](./src/main/resources/images/SolutionDeploySelect.png)
+
+2. In Solution Deployment dialog browse your *cloud-c4c-ticket-duplicate-finder.mtar* found in your project build target directory and click *Deploy*
+
+   ![Browse MTA Archive and Deploy](./src/main/resources/images/BrowseMTAArchive.png)
+
+3. During Solution Deployment you need to provide the user id of the C4C User you have configured for OData API Access. Click the *Deploy* button to continue deployment.
+
+   ![Provide C4C User ID](./src/main/resources/images/ProvideC4CUser.png)
+
+4. After the deployment have completed click *Finish* to close the deployment page
+
+   ![Deployment Complete](./src/main/resources/images/DeploymentComplete.png)
+
+5. You can see the solution tile after deployment. Clicking on the solution tile, will open the solution details.
+
+   ![Solution](./src/main/resources/images/TicketDuplicateFinderSolition.png)
+
+6. In solution overview page you can navigate to *ticketfinder* java application, which should have proper OAuth client and SAP CP destination configured.
+
+   ![Solution](./src/main/resources/images/DuplicateFinderSolution.png)
+
+7. Click on the link under Application URLs to open its homepage. If prompted, log on with your email address and the new password you set for accessing SAP Cloud for Customer.
+
+   Upon start, the application connects to the SAP Cloud for Customer backend and replicates and indexes the last 20 tickets. Opening the homepage shows the services exposed by the application and the status of the ticket index.
+
+   ![Application Overview](./src/main/resources/images/ApplicationOverviewPage.png)
+
+   *Note: The service endpoint URLs are used in the next steps, so it is a good idea to keep the page open.*
+   *Note: You can skip the manual application deployment and connectivity configuration, when using MTA deployment*
+
+## Manual Application Deployment via the SAP Cloud Platform Cockpit (Optional)
+
+The following step is covered as part of MTA Solution Deployment and is only needed if you would want to deploy application components separately and manually for example on SAP CP trial landscape. 
+
+1. Open the overview page of your Neo environment *SAP Cloud Platform Extension Subaccount*.
 
    ![Subaccount Overview](./src/main/resources/images/SubaccountOverview.png)
 
-2. Choose *User information* in the top right corner and note your S/P-user ID.
-
-   ![User Information](./src/main/resources/images/userInfo.png)
-
-3. In the left-hand navigation menu, choose *Applications* > *Java Applications*.
+2. In the left-hand navigation menu, choose *Applications* > *Java Applications*.
 
    ![Open subaccount link](./src/main/resources/images/DeployApplications.png)
 
-4. Choose *Deploy Application* and in the dialog box that appears, enter the following values:
+3. Choose *Deploy Application* and in the dialog box that appears, enter the following values:
 
     - WAR File Location: ROOT.war in your Eclipse <Project Folder>/target folder
-    - Application Name: tdf<your s/p-user ID> (only lowercase letters, e.g. tdfp1234567890)
+    - Application Name: ticketfinder
     - Runtime Name: Java Web Tomcat 8
     - JVM Version: JRE 8
 
@@ -147,11 +211,13 @@ The required interface type will be specified where appropriate.
 
    ![Deploy application](./src/main/resources/images/DeployApplication.png)
 
-5. Do NOT start the application at this point. Choose *Done*.
+4. Do NOT start the application at this point. Choose *Done*.
    
    ![Deploy completed](./src/main/resources/images/DeployCompleted.png)
 
-## Configuring the Application Connectivity to SAP Cloud for Customer OData API
+## Manual Configuration of the Application Connectivity to SAP Cloud for Customer OData API (Optional)
+
+The following step is covered as part of MTA Solution Deployment and is only needed if you would want to deploy application components separately and manually for example on SAP CP trial landscape. 
 
 The application replicates and indexes the ticket information from the SAP Cloud for Customer system using OData API. During startup it replicates the last 20 tickets from the system and adds them in the index.
 
@@ -171,7 +237,7 @@ You need to configure the API access to SAP Cloud for Customer for your applicat
 
     - *Client ID* is automatically generated client identifier. Write this down for SAP Cloud Platform destination configuration
     - *Client Secret* - Invent and enter a secret. You will need to remember this secret for creating the SAP Cloud Platform destination configuration later
-    - *Description* - Suitable description for your client. Use : "<ApplicationName> Client" (e.g "tdfp0123456789 Client")
+    - *Description* - Suitable description for your client. Use : "<ApplicationName> Client" (e.g "ticketfinder Client")
     - *Issuer Name* - Select your SAP Cloud Platform Subaccount Service Provider. This is configured as OAuth 2.0 Identity Provider in SAP Cloud for Customer
     - *Scope* - Under scope select *UIWC:CC_HOME*
 
@@ -377,14 +443,14 @@ This allows automatic indexing of new tickets upon receiving them in the system.
    ![OData Feed Notification](./src/main/resources/images/ODataEventNotifications.png)
 
 2. Choose *Add Row* to add a new subscription and follow the instructions:
-    - In the newly created row, enter a name for your subscription, for example **tdpf1234567890 Subscription** .
+    - In the newly created row, enter a name for your subscription, for example **ticketfinder Subscription** .
     - Set the *Consumer Endpoint* to the location of *Notification Service* endpoint provided by your application home page.
     - As an *Authentication Type* choose *Basic* and enter a random user & password. The application endpoint is not protected. **Don't close this window yet.**
     - In the Subscriptions section add a row and set up the following subscription:
        - Business Object Name - SERVICE_REQUEST
        - OData Service - c4codata
        - OData Collection - ServiceRequestCollection
-       - Event - C (Creation)(Choose “Create”)
+       - Event - C (Creation)(Choose *Create*)
     - *Save* the subscription configuration
 
    ![OData Feed Subscription](./src/main/resources/images/ODataEventNotificationSubscription.png)
