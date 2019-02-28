@@ -16,17 +16,17 @@ import com.sap.cloud.c4c.ticket.duplicate.finder.connectivity.InvalidResponseExc
 public class C4CTicketService {
 	
 	private static final String QUERY_PATH = "{0}%20eq%20%27{1}%27{2}";
-	private static final String SELECT_QUERY_PATH = "&$select=ID,ObjectID,Name,ServicePriorityCodeText,ItemListServiceRequestExecutionLifeCycleStatusCodeText";
-	private static final String DESTINATION_NAME = "sap_cloud4customer_core_odata_basic";
+	private static final String SELECT_QUERY_PATH = "&$select=ID,ObjectID,Name,ServicePriorityCodeText,ServiceRequestUserLifeCycleStatusCodeText,RequestInitialReceiptdatetimecontent";
+	private static final String DESTINATION_NAME = "sap_cloud4customer_odata";
 	private static final String FILTER_BY_ID_QUERY_PATH = "ServiceRequestCollection?$filter=ID";
 	private static final String FILTER_BY_OBJECT_ID_QUERY_PATH = "ServiceRequestCollection?$filter=ObjectID";
 	private static final String OBJECT_ID_JSON_NODE = "ObjectID";
 	private static final String ID_JSON_NODE = "ID";
-	private static final String SUBJECT_NAME_JSON_NODE = "content";
-	private static final String STATUS_JSON_NODE = "ItemListServiceRequestExecutionLifeCycleStatusCodeText";
+	private static final String SUBJECT_NAME_JSON_NODE = "Name";
+	private static final String STATUS_JSON_NODE = "ServiceRequestUserLifeCycleStatusCodeText";
 	private static final String PRIORITY_JSON_NODE = "ServicePriorityCodeText";
 	private static final String RESULTS_JSON_TREE_NODE = "results";
-	private static final String LAST_CREATED_TICKETS_QUERY_PATH = "ServiceRequestCollection?$orderby=CreationDate%20desc&$top={0}{1}";
+	private static final String LAST_CREATED_TICKETS_QUERY_PATH = "ServiceRequestCollection?$orderby=RequestInitialReceiptdatetimecontent%20desc&$top={0}{1}";
 
 	public static C4CTicket retrieveC4CTicketByObjectID(String objectId) throws IOException, InvalidResponseException, C4CTicketNotFoundException {
 		String ticketDetailsURLQueryPath = MessageFormat.format(QUERY_PATH, FILTER_BY_OBJECT_ID_QUERY_PATH, objectId,

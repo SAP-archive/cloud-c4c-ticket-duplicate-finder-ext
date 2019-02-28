@@ -1,0 +1,37 @@
+_schema-version: '3.1'
+
+parameters:
+  hcp-deployer-version: '1.2.0'
+  title: SAP Duplicate Tickets Finder
+  description: SAP duplicate tickets finder is a sample extension application for SAP Cloud for Customer, that helps support employees in finding duplicate tickets reported for the same customer issues.
+
+ID: com.sap.cloud.c4c.ticket.duplicate.finder
+version: 1.0.0
+
+modules:
+  - name: ticker-duplicate-finder
+    type: java.tomcat
+    requires:
+      - name: c4c_parameters
+    parameters:
+       name: ticketfinder
+       java-version: JRE 8
+       runtime-version: 2
+       c4c-connectivity-configuration:
+         name: C4C_ODATA_API_Connectivity
+         force-overwrite: true
+         destinations:
+           - type: technical-user
+             technical-user-id: ~{c4c_parameters/technical-user-id}
+             name: sap_cloud4customer_odata
+             description: Destination C4C OData API
+
+resources:
+  - name: c4c_parameters
+    properties:
+      technical-user-id:
+    properties-metadata:
+      technical-user-id:
+        description: SAP Cloud for Customer User ID for OData API Access
+        default-value: SERVICEUSER01
+

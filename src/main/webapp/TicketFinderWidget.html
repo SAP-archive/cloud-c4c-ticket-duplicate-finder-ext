@@ -72,7 +72,7 @@
 <script type="text/javascript">
   function getTickets(currentTicketId) {
     sap.byd.ui.mashup.callService({
-      serviceId: '<SearchServiceID>',
+      serviceId: 'SearchServiceID',
       parameter: {"{ticketId}": currentTicketId },
       onComplete: 'getTicketsOnCompleteHandler',
       onError: 'getTicketsOnErrorHandler'
@@ -85,7 +85,7 @@
 <script type="text/javascript">
   function mergeTickets(currentId, duplicateId) {
     sap.byd.ui.mashup.callService({
-      serviceId: '<MergeServiceID>',
+      serviceId: 'MergeServiceID',
       parameter: {"currentId": currentId,"duplicateId": duplicateId},
       onComplete: 'mergeTicketsOnCompleteHandler',
       onError: 'mergeTicketsOnErrorHandler'
@@ -102,7 +102,7 @@
 		getTicketsOnCompleteHandler = function(data){
 		var data = JSON.parse(data);
 		var model = new sap.ui.model.json.JSONModel(_parseData(data));
-		sap.ui.getCore().byId("view1").setModel(model, "tickets");	        	
+		sap.ui.getCore().byId("view1").setModel(model, "tickets");
 		}
 		getTicketsOnErrorHandler = function(error){
 			sap.m.MessageBox.error("No information for that ticket.");
@@ -179,18 +179,9 @@
 			        },
 			        
 				    getTicketDeepLink: function(ticketId){
-						var encodedJson = this.prepareBase64EncodedJson(ticketId);
-						return "https://" + sap.byd.ui.mashup.context.system.ShortHostname + "?redirectUrl=/sap/byd/runtime#Nav/1/" + encodedJson;
-				    },
-				    
-				    prepareBase64EncodedJson: function(ticketId) {
-				    	var json = {
-				    		thingparams: { Key: ticketId },
-				    		inPort: "Inspect",
-				    		target: "/BYD_COD/ServiceOnDemand/AgentWorkspace/COD_SEOD_Agent_Workspace_TI.TI.uicomponent"
-				    	}
-			            return btoa(JSON.stringify(json));
+						return "https://" + sap.byd.ui.mashup.context.system.ShortHostname + "/sap/byd/nav?bo=COD_SRQ_AGENT_TT&nav_mode=TI&param.Key=" + ticketId;
 				    }
+				    
 				});
 			});
 

@@ -1,0 +1,15 @@
+Name=sap_cloud4customer_odata
+Description=SAP Cloud for Customer OData API
+Type=HTTP
+Authentication=OAuth2SAMLBearerAssertion
+ProxyType=Internet
+URL=https\://<C4C Host>/sap/c4c/odata/v1/c4codataapi
+#clientKey=<< Existing password/certificate removed on export >>
+audience=<Replace with C4C Local Service Provider Name>
+SystemUser=SERVICEAGENT01
+tokenServiceURL=https\://<C4C Host>/sap/bc/sec/oauth2/token
+tokenServiceUser=<Replace with OAuth Client ID>
+#tokenServicePassword=<< Existing password/certificate removed on export >>
+authnContextClassRef=urn\:none
+scope=UIWC\:CC_HOME
+
