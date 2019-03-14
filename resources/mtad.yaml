@@ -33,5 +33,5 @@ resources:
     properties-metadata:
       technical-user-id:
         description: SAP Cloud for Customer User ID for OData API Access
-        default-value: SERVICEUSER01
+        default-value: SERVICEAGENT01
 
