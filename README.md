@@ -15,6 +15,7 @@ Implementing extension application hosted on the SAP Cloud Platform allows devel
 ![alt tag](./src/main/resources/images/ApplicationTypes.png)
 
 Extension applications have the following characteristics:
+
 * Implement business logic and/or data processing in Java Web container hosted on the platform
 * Consume SAP Cloud for Customer data using OData APIs
 * Provide back-end services for UI or SAP Cloud for Customer consumption
@@ -100,7 +101,7 @@ The required interface type will be specified where appropriate.
 3. Enter https://github.com/SAP/cloud-c4c-ticket-duplicate-finder-ext.git in the URI field and choose *Next*.
 
    ![Clone Git Repository URL](./src/main/resources/images/CloneGitRepoURL.png)
-4. Select the *teched_2018* branch and choose *Next*.
+4. Select the *master* branch and choose *Next*.
 
    ![Select branch](./src/main/resources/images/GitBranchSelect.png)
 5. Set the *Directory* field and choose *Finish*. Take a note of that directory, we will refer to it as *Project Folder* later in the exercises.
@@ -139,7 +140,7 @@ The required interface type will be specified where appropriate.
 4. Choose *Deploy Application* and in the dialog box that appears, enter the following values:
 
     - WAR File Location: ROOT.war in your Eclipse <Project Folder>/target folder
-    - Application Name: tdf<your s/p-user ID> (only lowercase letters, e.g. tdfp1234567890)
+    - Application Name: ticketfinder
     - Runtime Name: Java Web Tomcat 8
     - JVM Version: JRE 8
 
@@ -171,7 +172,7 @@ You need to configure the API access to SAP Cloud for Customer for your applicat
 
     - *Client ID* is automatically generated client identifier. Write this down for SAP Cloud Platform destination configuration
     - *Client Secret* - Invent and enter a secret. You will need to remember this secret for creating the SAP Cloud Platform destination configuration later
-    - *Description* - Suitable description for your client. Use : "<ApplicationName> Client" (e.g "tdfp0123456789 Client")
+    - *Description* - Suitable description for your client. Use : "<ApplicationName> Client" (e.g "ticketfinder Client")
     - *Issuer Name* - Select your SAP Cloud Platform Subaccount Service Provider. This is configured as OAuth 2.0 Identity Provider in SAP Cloud for Customer
     - *Scope* - Under scope select *UIWC:CC_HOME*
 
@@ -377,7 +378,7 @@ This allows automatic indexing of new tickets upon receiving them in the system.
    ![OData Feed Notification](./src/main/resources/images/ODataEventNotifications.png)
 
 2. Choose *Add Row* to add a new subscription and follow the instructions:
-    - In the newly created row, enter a name for your subscription, for example **tdpf1234567890 Subscription** .
+    - In the newly created row, enter a name for your subscription, for example **ticketfinder Subscription** .
     - Set the *Consumer Endpoint* to the location of *Notification Service* endpoint provided by your application home page.
     - As an *Authentication Type* choose *Basic* and enter a random user & password. The application endpoint is not protected. **Don't close this window yet.**
     - In the Subscriptions section add a row and set up the following subscription:
