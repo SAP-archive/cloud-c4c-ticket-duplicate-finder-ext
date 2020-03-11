@@ -69,46 +69,6 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${maven.war.plugin.version}</version>
 			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<finalName>${project.artifactId}</finalName>
-					<appendAssemblyId>false</appendAssemblyId>
-					<descriptors>
-						<descriptor>assembly.xml</descriptor>
-					</descriptors>
-					<archive>
-						<manifestFile>resources/MANIFEST.MF</manifestFile>
-					</archive>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>com.coderplus.maven.plugins</groupId>
-				<artifactId>copy-rename-maven-plugin</artifactId>
-				<version>1.0</version>
-				<executions>
-					<execution>
-						<id>rename-file</id>
-						<phase>install</phase>
-						<goals>
-							<goal>rename</goal>
-						</goals>
-						<configuration>
-							<sourceFile>target/${artifactId}.jar</sourceFile>
-							<destinationFile>target/${artifactId}.mtar</destinationFile>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
 
